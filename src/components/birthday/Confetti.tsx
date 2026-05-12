@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const COLORS = ["#ff6b9d", "#ffd166", "#f78ca0", "#ffafbd", "#ffffff", "#ff9ec7", "#ffc4e1"];
 const SHAPES = ["■", "●", "▲", "♥", "✦"];
@@ -20,13 +21,16 @@ function makeBurst(n: number): Piece[] {
 }
 
 export function ConfettiFinale() {
+  const isMobile = useIsMobile();
+  const initialN = isMobile ? 35 : 80;
+  const burstN = isMobile ? 55 : 120;
   const [pieces, setPieces] = useState<Piece[]>([]);
 
   useEffect(() => {
-    setPieces(makeBurst(80));
-  }, []);
+    setPieces(makeBurst(initialN));
+  }, [initialN]);
 
-  const burst = () => setPieces(makeBurst(120));
+  const burst = () => setPieces(makeBurst(burstN));
 
   return (
     <section className="relative px-6 py-32 text-center overflow-hidden">

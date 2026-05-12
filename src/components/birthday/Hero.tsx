@@ -1,27 +1,42 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect } from "react";
 import { Stars } from "./Stars";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const NAME = "Raha";
 
 export function Hero() {
+  const isMobile = useIsMobile();
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const tiltX = useTransform(my, [-300, 300], [8, -8]);
   const tiltY = useTransform(mx, [-300, 300], [-8, 8]);
 
   useEffect(() => {
+    if (isMobile) return;
+    let raf = 0;
+    let lx = 0, ly = 0;
     const onMove = (e: MouseEvent) => {
-      mx.set(e.clientX - window.innerWidth / 2);
-      my.set(e.clientY - window.innerHeight / 2);
+      lx = e.clientX - window.innerWidth / 2;
+      ly = e.clientY - window.innerHeight / 2;
+      if (!raf) {
+        raf = requestAnimationFrame(() => {
+          mx.set(lx);
+          my.set(ly);
+          raf = 0;
+        });
+      }
     };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [mx, my]);
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [mx, my, isMobile]);
 
   return (
     <section className="relative flex min-h-[100dvh] flex-col items-center justify-center px-6 py-20 text-center overflow-hidden">
-      <Stars count={80} />
+      <Stars count={isMobile ? 30 : 80} />
 
       {/* Aurora blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
