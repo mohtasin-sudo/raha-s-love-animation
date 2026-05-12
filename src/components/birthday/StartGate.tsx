@@ -115,7 +115,7 @@ export function StartGate({ onStart }: { onStart: () => void }) {
           }}
         >
           A little surprise
-        </motion.h1>
+        </motion.h2>
 
         <motion.p
           initial={{ opacity: 0 }}
