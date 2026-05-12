@@ -9,6 +9,7 @@ import { GiftBox } from "@/components/birthday/GiftBox";
 import { ConfettiFinale } from "@/components/birthday/Confetti";
 import { FloatingHearts } from "@/components/birthday/FloatingHearts";
 import { CinematicIntro } from "@/components/birthday/CinematicIntro";
+import { ScrollMascot } from "@/components/birthday/ScrollMascot";
 
 import musicSrc from "@/assets/birthday-music.mp3";
 
@@ -124,6 +125,7 @@ function Index() {
       <audio ref={audioRef} src={musicSrc} preload="auto" loop playsInline />
 
       {!introDone && <CinematicIntro onDone={() => setIntroDone(true)} />}
+      {introDone && <ScrollMascot />}
 
       <FloatingHearts count={22} />
       <div className="relative z-10">
