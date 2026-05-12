@@ -118,7 +118,7 @@ export function Hero() {
         className="mt-8 max-w-md text-lg sm:text-xl italic"
         style={{ fontFamily: "var(--font-serif)", color: "oklch(0.85 0.03 30)" }}
       >
-        Today the stars align a little brighter — just for you.
+        Hope your day is as kind to you as you deserve.
       </motion.p>
 
       <motion.div
