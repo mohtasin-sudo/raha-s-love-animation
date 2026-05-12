@@ -99,7 +99,7 @@ export function ConfettiFinale() {
           className="mt-3 text-3xl sm:text-5xl shimmer-text"
           style={{ fontFamily: "var(--font-script)" }}
         >
-          A Premik Coder
+          A Silent Admirer
         </p>
         <p
           className="mt-6 text-[10px] uppercase tracking-[0.5em] text-white/40"

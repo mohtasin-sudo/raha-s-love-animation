@@ -6,7 +6,7 @@ const lines = [
   "We know each other —",
   "you and me, just the two of us.",
   "But tonight, let me stay nameless.",
-  "Just call me… A Premik Coder.",
+  "Just call me… A Silent Admirer.",
 ];
 
 export function CinematicIntro({ onDone }: { onDone: () => void }) {
