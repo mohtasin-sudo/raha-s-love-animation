@@ -15,12 +15,18 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
 
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = [];
-    const PER = 2800;
-    lines.forEach((_, i) => {
-      timers.push(setTimeout(() => setStep(i + 1), (i + 1) * PER));
+    // ~75ms per character, min 2.8s, max 6s — gives time to actually read
+    const durations = lines.map((l) =>
+      Math.min(6000, Math.max(2800, l.length * 75 + 1200)),
+    );
+    let acc = 600; // small initial delay
+    durations.forEach((d, i) => {
+      const showAt = acc;
+      timers.push(setTimeout(() => setStep(i + 1), showAt));
+      acc += d;
     });
-    timers.push(setTimeout(() => setClosing(true), lines.length * PER + 1200));
-    timers.push(setTimeout(() => onDone(), lines.length * PER + 2400));
+    timers.push(setTimeout(() => setClosing(true), acc + 400));
+    timers.push(setTimeout(() => onDone(), acc + 1600));
     return () => timers.forEach(clearTimeout);
   }, [onDone]);
 
