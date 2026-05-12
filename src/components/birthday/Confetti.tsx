@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLowPower } from "@/hooks/use-low-power";
 
 const COLORS = ["#ff6b9d", "#ffd166", "#f78ca0", "#ffafbd", "#ffffff", "#ff9ec7", "#ffc4e1"];
 const SHAPES = ["■", "●", "▲", "♥", "✦"];
@@ -22,8 +23,9 @@ function makeBurst(n: number): Piece[] {
 
 export function ConfettiFinale() {
   const isMobile = useIsMobile();
-  const initialN = isMobile ? 35 : 80;
-  const burstN = isMobile ? 55 : 120;
+  const lowPower = useLowPower();
+  const initialN = lowPower ? 18 : isMobile ? 35 : 80;
+  const burstN = lowPower ? 28 : isMobile ? 55 : 120;
   const [pieces, setPieces] = useState<Piece[]>([]);
 
   useEffect(() => {
