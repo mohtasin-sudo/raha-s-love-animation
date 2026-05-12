@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 const message =
-  "Raha, you'll probably never read this — and even if you do, you won't know it was me. I'm just someone who started liking you from a distance and never really stopped. I know you don't feel the same, and that's okay. I'm not writing this to ask for anything. I only wanted to say… the world is a little softer because you're in it. So today, on your birthday, I'm not wishing for you to be mine. I'm wishing for you to be happy — really, truly happy. That's enough for me.";
+  "Raha — happy birthday. We don't really talk, and you probably don't know me. That's okay. I just wanted to say: I hope this year is gentle to you. I hope your work goes well, your people stay close, and the small things keep making you smile. Sometimes I think about how strange life is — that you can quietly wish someone well from far away, and they'll never know. So here it is, in a place you'll probably never find. Be happy, Raha. That's all.";
 
 export function WishCard() {
   const ref = useRef(null);
@@ -65,23 +65,23 @@ export function WishCard() {
         </div>
 
         <h3
-          className="mb-8 mt-2 text-center text-4xl sm:text-5xl"
-          style={{ fontFamily: "var(--font-script)", color: "oklch(0.35 0.15 10)" }}
+          className="mb-8 mt-2 text-center text-3xl sm:text-4xl"
+          style={{ fontFamily: "var(--font-display)", color: "oklch(0.32 0.12 15)", letterSpacing: "0.02em" }}
         >
-          To my dearest Raha,
+          For Raha,
         </h3>
         <p
-          className="min-h-[12rem] text-center text-xl leading-relaxed sm:text-2xl"
-          style={{ fontFamily: "var(--font-hand)", color: "var(--ink)" }}
+          className="min-h-[12rem] text-left text-lg leading-[1.75] sm:text-xl sm:leading-[1.8]"
+          style={{ fontFamily: "var(--font-serif)", color: "var(--ink)", fontWeight: 400 }}
         >
           {typed}
-          <span className="inline-block w-0.5 h-6 bg-current align-middle ml-0.5 animate-pulse" />
+          <span className="inline-block w-0.5 h-5 bg-current align-middle ml-0.5 animate-pulse" />
         </p>
         <div
-          className="mt-10 text-right text-2xl"
-          style={{ fontFamily: "var(--font-script)", color: "oklch(0.35 0.15 10)" }}
+          className="mt-10 text-right text-base italic"
+          style={{ fontFamily: "var(--font-serif)", color: "oklch(0.40 0.10 15)" }}
         >
-          — from someone who loves you from afar 🌹
+          — just someone, from far away
         </div>
       </motion.div>
     </section>

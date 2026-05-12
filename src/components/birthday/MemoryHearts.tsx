@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 
 const wishes = [
-  { icon: "🌹", text: "I admire you quietly, the way stars admire the moon." },
-  { icon: "✨", text: "May your year sparkle as much as your smile does in my memory." },
-  { icon: "🎶", text: "You'll never hear it, but you are the song my heart hums all day." },
-  { icon: "🌙", text: "Sweet dreams, big wishes — every single one of them yours." },
-  { icon: "💝", text: "Even unanswered, my feelings for you stay gentle and kind." },
-  { icon: "☕", text: "I don't need you to be mine — I just need you to be happy." },
+  { icon: "🌱", text: "Wishing you a calm, easy year." },
+  { icon: "✨", text: "May good news find you often." },
+  { icon: "📚", text: "Hope your dreams keep moving forward." },
+  { icon: "🌙", text: "Rest well. You've earned it." },
+  { icon: "☕", text: "Small joys, every single day." },
+  { icon: "🕊️", text: "Be happy, Raha. That's the whole wish." },
 ];
 
 export function MemoryHearts() {
@@ -26,7 +26,7 @@ export function MemoryHearts() {
           className="text-4xl sm:text-6xl shimmer-text italic"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Little wishes, just for you
+          A few wishes for your year
         </h3>
       </motion.div>
 
@@ -60,8 +60,8 @@ export function MemoryHearts() {
                 {w.icon}
               </div>
               <p
-                className="text-xl sm:text-2xl leading-snug"
-                style={{ fontFamily: "var(--font-hand)", color: "oklch(0.97 0.03 30)" }}
+                className="text-base sm:text-lg leading-relaxed"
+                style={{ fontFamily: "var(--font-serif)", color: "oklch(0.97 0.03 30)", fontWeight: 400 }}
               >
                 {w.text}
               </p>
