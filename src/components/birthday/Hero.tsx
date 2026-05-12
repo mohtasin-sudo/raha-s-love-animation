@@ -98,6 +98,40 @@ export function Hero() {
         Hope your day is as kind to you as you deserve.
       </motion.p>
 
+      {/* Scroll indicator */}
+      <motion.button
+        type="button"
+        onClick={() => window.scrollBy({ top: window.innerHeight * 0.9, behavior: "smooth" })}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 3 }}
+        aria-label="Scroll for more"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 group"
+        style={{ color: "var(--ivory-soft)" }}
+      >
+        <span
+          className="text-[10px] tracking-[0.4em] uppercase"
+          style={{ fontFamily: "var(--font-sans)", color: "var(--gold)" }}
+        >
+          Scroll for more
+        </span>
+        <motion.span
+          aria-hidden
+          className="block h-10 w-[1px]"
+          style={{ background: "linear-gradient(180deg, var(--gold), transparent)" }}
+          animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.span
+          aria-hidden
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          className="text-base"
+          style={{ color: "var(--gold)" }}
+        >
+          ▾
+        </motion.span>
+      </motion.button>
     </section>
   );
 }
