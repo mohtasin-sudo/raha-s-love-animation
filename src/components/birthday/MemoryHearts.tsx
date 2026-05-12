@@ -60,8 +60,8 @@ export function MemoryHearts() {
                 {w.icon}
               </div>
               <p
-                className="text-xl sm:text-2xl leading-snug"
-                style={{ fontFamily: "var(--font-hand)", color: "oklch(0.97 0.03 30)" }}
+                className="text-base sm:text-lg leading-relaxed"
+                style={{ fontFamily: "var(--font-serif)", color: "oklch(0.97 0.03 30)", fontWeight: 400 }}
               >
                 {w.text}
               </p>
