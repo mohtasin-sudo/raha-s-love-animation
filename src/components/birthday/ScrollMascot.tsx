@@ -8,7 +8,14 @@ export function ScrollMascot() {
 
   useEffect(() => {
     const t = setTimeout(() => setShow(true), 2200);
-    return () => clearTimeout(t);
+    const onScroll = () => {
+      if (window.scrollY > 120) setShow(false);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   const handleClick = () => {
