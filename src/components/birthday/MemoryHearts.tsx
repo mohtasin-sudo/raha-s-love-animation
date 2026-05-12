@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 
 const wishes = [
-  { icon: "🌹", text: "You're my favorite hello and hardest goodbye." },
-  { icon: "✨", text: "May your year sparkle as much as your smile." },
-  { icon: "🎶", text: "You are the song my heart hums all day." },
-  { icon: "🌙", text: "Sweet dreams, big wishes — all of them yours." },
-  { icon: "💝", text: "Forever grateful the universe made you, Raha." },
-  { icon: "☕", text: "Mornings, coffees, forevers — I want them all with you." },
+  { icon: "🌹", text: "I admire you quietly, the way stars admire the moon." },
+  { icon: "✨", text: "May your year sparkle as much as your smile does in my memory." },
+  { icon: "🎶", text: "You'll never hear it, but you are the song my heart hums all day." },
+  { icon: "🌙", text: "Sweet dreams, big wishes — every single one of them yours." },
+  { icon: "💝", text: "Even unanswered, my feelings for you stay gentle and kind." },
+  { icon: "☕", text: "I don't need you to be mine — I just need you to be happy." },
 ];
 
 export function MemoryHearts() {
