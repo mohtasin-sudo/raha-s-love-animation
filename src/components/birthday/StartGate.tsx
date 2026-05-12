@@ -75,7 +75,25 @@ export function StartGate({ onStart }: { onStart: () => void }) {
           className="relative z-10 text-[10px] uppercase tracking-[0.6em] text-white/50 mb-4"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          ✦  For Raha  ✦
+          ✦  For{" "}
+          <span
+            className="not-italic"
+            style={{
+              fontFamily: "var(--font-script)",
+              fontSize: "1.6em",
+              letterSpacing: "0.02em",
+              background:
+                "linear-gradient(135deg, oklch(0.92 0.13 25), oklch(0.85 0.18 60), oklch(0.92 0.13 25))",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+              textShadow: "0 0 24px oklch(0.85 0.18 25 / 0.6)",
+              padding: "0 0.15em",
+            }}
+          >
+            Raha
+          </span>
+          {"  "}✦
         </motion.p>
 
         {/* Title */}
@@ -112,7 +130,7 @@ export function StartGate({ onStart }: { onStart: () => void }) {
           whileTap={{ scale: 0.94 }}
           onClick={onStart}
           aria-label="Begin"
-          className="group relative z-10 rounded-full px-12 py-5 text-sm font-medium uppercase tracking-[0.4em] text-white"
+          className="group relative z-10 rounded-full px-8 py-3.5 text-xs font-medium uppercase tracking-[0.35em] text-white"
           style={{
             background:
               "linear-gradient(135deg, oklch(0.72 0.19 10), oklch(0.82 0.17 25), oklch(0.78 0.15 60))",
