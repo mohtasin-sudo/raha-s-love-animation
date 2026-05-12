@@ -67,39 +67,139 @@ export function StartGate({ onStart }: { onStart: () => void }) {
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* Kicker */}
-        <motion.p
+        {/* Kicker with ornamental rules */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 1 }}
-          className="relative z-10 text-[10px] uppercase tracking-[0.6em] text-white/50 mb-3"
-          style={{ fontFamily: "'Playfair Display', serif" }}
+          className="relative z-10 mb-4 flex items-center gap-3"
         >
-          ✦  For  ✦
-        </motion.p>
+          <span
+            className="block h-px w-10 sm:w-16"
+            style={{
+              background:
+                "linear-gradient(90deg, transparent, oklch(0.85 0.14 70 / 0.9))",
+            }}
+          />
+          <span
+            className="text-[10px] uppercase tracking-[0.6em] text-white/60"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            ✦ For ✦
+          </span>
+          <span
+            className="block h-px w-10 sm:w-16"
+            style={{
+              background:
+                "linear-gradient(90deg, oklch(0.85 0.14 70 / 0.9), transparent)",
+            }}
+          />
+        </motion.div>
 
-        {/* Raha — hero name */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30, scale: 0.85, filter: "blur(14px)" }}
-          animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-          transition={{ delay: 0.35, duration: 1.3, ease: [0.2, 0.8, 0.2, 1] }}
-          className="relative z-10 leading-none"
-          style={{
-            fontFamily: "'Pinyon Script', cursive",
-            fontSize: "clamp(5.5rem, 22vw, 11rem)",
-            background:
-              "linear-gradient(135deg, oklch(0.95 0.08 30), oklch(0.85 0.18 25), oklch(0.88 0.16 60), oklch(0.95 0.08 30))",
-            backgroundSize: "200% 200%",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
-            filter:
-              "drop-shadow(0 0 28px oklch(0.85 0.18 25 / 0.55)) drop-shadow(0 0 50px oklch(0.78 0.18 10 / 0.35))",
-            paddingBottom: "0.1em",
-          }}
-        >
-          Raha
-        </motion.h1>
+        {/* Raha — hero name with ornaments */}
+        <div className="relative z-10 flex items-center justify-center">
+          {/* Left flourish */}
+          <motion.span
+            aria-hidden
+            initial={{ opacity: 0, x: 20, rotate: -10 }}
+            animate={{ opacity: 1, x: 0, rotate: 0 }}
+            transition={{ delay: 1.4, duration: 1 }}
+            className="hidden sm:block text-3xl mr-2"
+            style={{
+              fontFamily: "'Pinyon Script', cursive",
+              color: "oklch(0.88 0.14 60)",
+              textShadow: "0 0 16px oklch(0.85 0.18 25 / 0.6)",
+            }}
+          >
+            ❦
+          </motion.span>
+
+          <div className="relative">
+            {/* Crown sparkle above */}
+            <motion.span
+              aria-hidden
+              initial={{ opacity: 0, y: 10, scale: 0.6 }}
+              animate={{ opacity: [0, 1, 0.7, 1], y: 0, scale: 1 }}
+              transition={{ delay: 1.2, duration: 1.6, repeat: Infinity, repeatType: "reverse" }}
+              className="absolute left-1/2 -top-3 -translate-x-1/2 text-2xl"
+              style={{ filter: "drop-shadow(0 0 12px oklch(0.88 0.18 70 / 0.9))" }}
+            >
+              ✦
+            </motion.span>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30, scale: 0.85, filter: "blur(14px)" }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                filter: "blur(0px)",
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+              }}
+              transition={{
+                opacity: { delay: 0.35, duration: 1.3, ease: [0.2, 0.8, 0.2, 1] },
+                y: { delay: 0.35, duration: 1.3, ease: [0.2, 0.8, 0.2, 1] },
+                scale: { delay: 0.35, duration: 1.3, ease: [0.2, 0.8, 0.2, 1] },
+                filter: { delay: 0.35, duration: 1.3, ease: [0.2, 0.8, 0.2, 1] },
+                backgroundPosition: { duration: 8, repeat: Infinity, ease: "linear", delay: 1.5 },
+              }}
+              className="relative leading-none"
+              style={{
+                fontFamily: "'Pinyon Script', cursive",
+                fontSize: "clamp(5.5rem, 22vw, 11rem)",
+                background:
+                  "linear-gradient(110deg, oklch(0.95 0.08 30) 0%, oklch(0.85 0.18 25) 25%, oklch(0.92 0.18 80) 50%, oklch(0.85 0.18 25) 75%, oklch(0.95 0.08 30) 100%)",
+                backgroundSize: "300% 100%",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                filter:
+                  "drop-shadow(0 0 28px oklch(0.85 0.18 25 / 0.55)) drop-shadow(0 0 60px oklch(0.78 0.18 10 / 0.35))",
+                paddingBottom: "0.1em",
+              }}
+            >
+              Raha
+            </motion.h1>
+
+            {/* Underline swash */}
+            <motion.svg
+              aria-hidden
+              viewBox="0 0 200 20"
+              initial={{ opacity: 0, pathLength: 0 }}
+              animate={{ opacity: 1, pathLength: 1 }}
+              transition={{ delay: 1.3, duration: 1.6, ease: "easeInOut" }}
+              className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-[70%] h-3"
+              style={{ filter: "drop-shadow(0 0 6px oklch(0.85 0.18 25 / 0.7))" }}
+            >
+              <motion.path
+                d="M5 12 Q 50 2, 100 10 T 195 8"
+                stroke="oklch(0.88 0.16 60)"
+                strokeWidth="1.4"
+                fill="none"
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ delay: 1.3, duration: 1.6, ease: "easeInOut" }}
+              />
+            </motion.svg>
+          </div>
+
+          {/* Right flourish */}
+          <motion.span
+            aria-hidden
+            initial={{ opacity: 0, x: -20, rotate: 10 }}
+            animate={{ opacity: 1, x: 0, rotate: 0 }}
+            transition={{ delay: 1.4, duration: 1 }}
+            className="hidden sm:block text-3xl ml-2 scale-x-[-1]"
+            style={{
+              fontFamily: "'Pinyon Script', cursive",
+              color: "oklch(0.88 0.14 60)",
+              textShadow: "0 0 16px oklch(0.85 0.18 25 / 0.6)",
+            }}
+          >
+            ❦
+          </motion.span>
+        </div>
 
         {/* Subtitle */}
         <motion.h2
