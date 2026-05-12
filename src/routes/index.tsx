@@ -90,9 +90,9 @@ function Index() {
     if (!a || !introDone) return;
     let v = a.volume;
     const id = setInterval(() => {
-      v = Math.min(0.65, v + 0.04);
+      v = Math.min(1.0, v + 0.04);
       a.volume = v;
-      if (v >= 0.65) clearInterval(id);
+      if (v >= 1.0) clearInterval(id);
     }, 80);
     return () => clearInterval(id);
   }, [introDone]);
