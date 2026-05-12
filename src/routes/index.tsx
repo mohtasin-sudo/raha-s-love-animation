@@ -118,7 +118,7 @@ function Index() {
 
   return (
     <main className="relative film-grain vignette">
-      <audio ref={audioRef} src={musicSrc} preload="auto" />
+      <audio ref={audioRef} src={musicSrc} preload="auto" loop playsInline />
 
       {!introDone && <CinematicIntro onDone={() => setIntroDone(true)} />}
 
