@@ -65,23 +65,23 @@ export function WishCard() {
         </div>
 
         <h3
-          className="mb-8 mt-2 text-center text-4xl sm:text-5xl"
-          style={{ fontFamily: "var(--font-script)", color: "oklch(0.35 0.15 10)" }}
+          className="mb-8 mt-2 text-center text-3xl sm:text-4xl"
+          style={{ fontFamily: "var(--font-display)", color: "oklch(0.32 0.12 15)", letterSpacing: "0.02em" }}
         >
-          To my dearest Raha,
+          For Raha,
         </h3>
         <p
-          className="min-h-[12rem] text-center text-xl leading-relaxed sm:text-2xl"
-          style={{ fontFamily: "var(--font-hand)", color: "var(--ink)" }}
+          className="min-h-[12rem] text-left text-lg leading-[1.75] sm:text-xl sm:leading-[1.8]"
+          style={{ fontFamily: "var(--font-serif)", color: "var(--ink)", fontWeight: 400 }}
         >
           {typed}
-          <span className="inline-block w-0.5 h-6 bg-current align-middle ml-0.5 animate-pulse" />
+          <span className="inline-block w-0.5 h-5 bg-current align-middle ml-0.5 animate-pulse" />
         </p>
         <div
-          className="mt-10 text-right text-2xl"
-          style={{ fontFamily: "var(--font-script)", color: "oklch(0.35 0.15 10)" }}
+          className="mt-10 text-right text-base italic"
+          style={{ fontFamily: "var(--font-serif)", color: "oklch(0.40 0.10 15)" }}
         >
-          — from someone who loves you from afar 🌹
+          — just someone, from far away
         </div>
       </motion.div>
     </section>
