@@ -81,7 +81,7 @@ export function WishCard() {
           className="mt-10 text-right text-2xl"
           style={{ fontFamily: "var(--font-script)", color: "oklch(0.35 0.15 10)" }}
         >
-          — yours, always 💕
+          — from someone who loves you from afar 🌹
         </div>
       </motion.div>
     </section>
