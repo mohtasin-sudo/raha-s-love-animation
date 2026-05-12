@@ -7,22 +7,8 @@ export function ScrollMascot() {
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    // Appear a few seconds after the intro ends, only at the very top of page
-    const t = setTimeout(() => {
-      if (window.scrollY < 80) setShow(true);
-    }, 2200);
-
-    const onScroll = () => {
-      if (window.scrollY > 120) {
-        setShow(false);
-        setDismissed(true);
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener("scroll", onScroll);
-    };
+    const t = setTimeout(() => setShow(true), 2200);
+    return () => clearTimeout(t);
   }, []);
 
   const handleClick = () => {
