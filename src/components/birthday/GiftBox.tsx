@@ -122,7 +122,7 @@ export function GiftBox() {
                     }}
                   >
                     <p className="text-2xl" style={{ fontFamily: "var(--font-script)" }}>
-                      my whole heart 💖
+                      just a quiet wish ✨
                     </p>
                   </motion.div>
                 </>

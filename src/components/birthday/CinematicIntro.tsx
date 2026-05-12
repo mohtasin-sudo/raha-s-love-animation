@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 
 const lines = [
   "Today is your day, Raha.",
-  "We know each other,",
-  "but only a little.",
-  "But somewhere, quietly,",
-  "someone is wishing you well.",
+  "We know each other —",
+  "you and me, just the two of us.",
+  "But tonight, let me stay nameless.",
+  "Just call me… A Premik Coder.",
 ];
 
 export function CinematicIntro({ onDone }: { onDone: () => void }) {
