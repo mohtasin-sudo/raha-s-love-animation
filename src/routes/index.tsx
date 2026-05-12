@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Hero } from "@/components/birthday/Hero";
 import { WishCard } from "@/components/birthday/WishCard";
 import { Cake } from "@/components/birthday/Cake";
@@ -9,6 +9,8 @@ import { GiftBox } from "@/components/birthday/GiftBox";
 import { ConfettiFinale } from "@/components/birthday/Confetti";
 import { FloatingHearts } from "@/components/birthday/FloatingHearts";
 import { CinematicIntro } from "@/components/birthday/CinematicIntro";
+import { StartGate } from "@/components/birthday/StartGate";
+import musicSrc from "@/assets/birthday-music.mp3";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -38,11 +40,48 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [started, setStarted] = useState(false);
   const [introDone, setIntroDone] = useState(false);
+  const [muted, setMuted] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const handleStart = () => {
+    setStarted(true);
+    const a = audioRef.current;
+    if (a) {
+      a.volume = 0.55;
+      a.loop = true;
+      a.play().catch(() => {});
+    }
+  };
+
+  const toggleMute = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    a.muted = !a.muted;
+    setMuted(a.muted);
+  };
+
+  // Soft fade between intro and main (volume dip)
+  useEffect(() => {
+    const a = audioRef.current;
+    if (!a || !introDone) return;
+    let v = a.volume;
+    const id = setInterval(() => {
+      v = Math.min(0.65, v + 0.04);
+      a.volume = v;
+      if (v >= 0.65) clearInterval(id);
+    }, 80);
+    return () => clearInterval(id);
+  }, [introDone]);
 
   return (
     <main className="relative film-grain vignette">
-      {!introDone && <CinematicIntro onDone={() => setIntroDone(true)} />}
+      <audio ref={audioRef} src={musicSrc} preload="auto" />
+
+      {!started && <StartGate onStart={handleStart} />}
+      {started && !introDone && <CinematicIntro onDone={() => setIntroDone(true)} />}
+
       <FloatingHearts count={22} />
       <div className="relative z-10">
         <Hero />
@@ -53,6 +92,16 @@ function Index() {
         <GiftBox />
         <ConfettiFinale />
       </div>
+
+      {started && (
+        <button
+          onClick={toggleMute}
+          aria-label={muted ? "Unmute music" : "Mute music"}
+          className="fixed bottom-4 right-4 z-[150] rounded-full border border-white/20 bg-black/40 px-3 py-2 text-xs text-white/80 backdrop-blur hover:bg-black/60"
+        >
+          {muted ? "🔇 music" : "🔊 music"}
+        </button>
+      )}
     </main>
   );
 }
