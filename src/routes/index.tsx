@@ -9,7 +9,7 @@ import { GiftBox } from "@/components/birthday/GiftBox";
 import { ConfettiFinale } from "@/components/birthday/Confetti";
 import { FloatingHearts } from "@/components/birthday/FloatingHearts";
 import { CinematicIntro } from "@/components/birthday/CinematicIntro";
-import { StartGate } from "@/components/birthday/StartGate";
+
 import musicSrc from "@/assets/birthday-music.mp3";
 
 export const Route = createFileRoute("/")({
@@ -40,29 +40,51 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [started, setStarted] = useState(false);
   const [introDone, setIntroDone] = useState(false);
   const [muted, setMuted] = useState(false);
+  const [needsUnmute, setNeedsUnmute] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const handleStart = () => {
-    setStarted(true);
+  // Auto-start music on load; fall back to muted autoplay if blocked
+  useEffect(() => {
     const a = audioRef.current;
-    if (a) {
-      a.volume = 0.55;
-      a.loop = true;
+    if (!a) return;
+    a.loop = true;
+    a.volume = 0.55;
+    a.play().catch(() => {
+      // Browser blocked unmuted autoplay — try muted, then ask for a tap
+      a.muted = true;
+      setNeedsUnmute(true);
       a.play().catch(() => {});
+    });
+
+    const resume = () => {
+      a.muted = false;
+      setMuted(false);
+      setNeedsUnmute(false);
+      a.play().catch(() => {});
+      window.removeEventListener("pointerdown", resume);
+      window.removeEventListener("keydown", resume);
+    };
+    if (a.muted || a.paused) {
+      window.addEventListener("pointerdown", resume, { once: true });
+      window.addEventListener("keydown", resume, { once: true });
     }
-  };
+    return () => {
+      window.removeEventListener("pointerdown", resume);
+      window.removeEventListener("keydown", resume);
+    };
+  }, []);
 
   const toggleMute = () => {
     const a = audioRef.current;
     if (!a) return;
     a.muted = !a.muted;
     setMuted(a.muted);
+    if (!a.muted) a.play().catch(() => {});
   };
 
-  // Soft fade between intro and main (volume dip)
+  // Soft volume ramp once intro finishes
   useEffect(() => {
     const a = audioRef.current;
     if (!a || !introDone) return;
@@ -79,8 +101,7 @@ function Index() {
     <main className="relative film-grain vignette">
       <audio ref={audioRef} src={musicSrc} preload="auto" />
 
-      {!started && <StartGate onStart={handleStart} />}
-      {started && !introDone && <CinematicIntro onDone={() => setIntroDone(true)} />}
+      {!introDone && <CinematicIntro onDone={() => setIntroDone(true)} />}
 
       <FloatingHearts count={22} />
       <div className="relative z-10">
@@ -93,15 +114,13 @@ function Index() {
         <ConfettiFinale />
       </div>
 
-      {started && (
-        <button
-          onClick={toggleMute}
-          aria-label={muted ? "Unmute music" : "Mute music"}
-          className="fixed bottom-4 right-4 z-[150] rounded-full border border-white/20 bg-black/40 px-3 py-2 text-xs text-white/80 backdrop-blur hover:bg-black/60"
-        >
-          {muted ? "🔇 music" : "🔊 music"}
-        </button>
-      )}
+      <button
+        onClick={toggleMute}
+        aria-label={muted || needsUnmute ? "Unmute music" : "Mute music"}
+        className="fixed bottom-4 right-4 z-[150] rounded-full border border-white/20 bg-black/40 px-3 py-2 text-xs text-white/80 backdrop-blur hover:bg-black/60"
+      >
+        {muted || needsUnmute ? "🔇 tap for sound" : "🔊 music"}
+      </button>
     </main>
   );
 }
