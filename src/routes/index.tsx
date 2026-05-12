@@ -1,15 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { Hero } from "@/components/birthday/Hero";
-import { WishCard } from "@/components/birthday/WishCard";
-import { Cake } from "@/components/birthday/Cake";
-import { Constellation } from "@/components/birthday/Constellation";
-import { MemoryHearts } from "@/components/birthday/MemoryHearts";
-import { GiftBox } from "@/components/birthday/GiftBox";
-import { ConfettiFinale } from "@/components/birthday/Confetti";
 import { FloatingHearts } from "@/components/birthday/FloatingHearts";
 import { CinematicIntro } from "@/components/birthday/CinematicIntro";
 import { ScrollMascot } from "@/components/birthday/ScrollMascot";
+
+// Below-the-fold sections — code-split so the first paint is just intro + Hero
+const WishCard = lazy(() => import("@/components/birthday/WishCard").then(m => ({ default: m.WishCard })));
+const Cake = lazy(() => import("@/components/birthday/Cake").then(m => ({ default: m.Cake })));
+const Constellation = lazy(() => import("@/components/birthday/Constellation").then(m => ({ default: m.Constellation })));
+const MemoryHearts = lazy(() => import("@/components/birthday/MemoryHearts").then(m => ({ default: m.MemoryHearts })));
+const GiftBox = lazy(() => import("@/components/birthday/GiftBox").then(m => ({ default: m.GiftBox })));
+const ConfettiFinale = lazy(() => import("@/components/birthday/Confetti").then(m => ({ default: m.ConfettiFinale })));
 
 import musicSrc from "@/assets/birthday-music.mp3";
 
@@ -43,6 +45,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [introDone, setIntroDone] = useState(false);
+  const handleIntroDone = useCallback(() => setIntroDone(true), []);
   const [muted, setMuted] = useState(false);
   const [needsUnmute, setNeedsUnmute] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -124,18 +127,20 @@ function Index() {
     <main className="relative film-grain vignette">
       <audio ref={audioRef} src={musicSrc} preload="auto" loop playsInline />
 
-      {!introDone && <CinematicIntro onDone={() => setIntroDone(true)} />}
+      {!introDone && <CinematicIntro onDone={handleIntroDone} />}
       {introDone && <ScrollMascot />}
 
       <FloatingHearts count={22} />
       <div className="relative z-10">
         <Hero />
-        <WishCard />
-        <Constellation />
-        <Cake />
-        <MemoryHearts />
-        <GiftBox />
-        <ConfettiFinale />
+        <Suspense fallback={null}>
+          <WishCard />
+          <Constellation />
+          <Cake />
+          <MemoryHearts />
+          <GiftBox />
+          <ConfettiFinale />
+        </Suspense>
       </div>
 
       <button
