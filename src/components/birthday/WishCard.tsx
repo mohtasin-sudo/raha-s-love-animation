@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 const message =
-  "Raha — happy birthday. You know me, and I know you. Just the two of us in this little secret. I won't sign my name today; let me hide behind a small title — A Premik Coder — and just say what I mean. I hope this year is gentle to you. I hope your work goes the way you want it to, your people stay close, and the small things keep making you smile. You probably already know who's writing this. That's okay. Today isn't about me. Be happy, Raha. That's the whole wish.";
+  "Raha — happy birthday. You know me, and I know you. Just the two of us in this little secret. I won't sign my name today; let me hide behind a small title — A Silent Admirer — and just say what I mean. I hope this year is gentle to you. I hope your work goes the way you want it to, your people stay close, and the small things keep making you smile. You probably already know who's writing this. That's okay. Today isn't about me. Be happy, Raha. That's the whole wish.";
 
 export function WishCard() {
   const ref = useRef(null);
@@ -77,7 +77,7 @@ export function WishCard() {
             className="text-base italic"
             style={{ fontFamily: "var(--font-display)", color: "var(--ink-soft)" }}
           >
-            — A Premik Coder
+            — A Silent Admirer
           </span>
         </div>
       </motion.article>
