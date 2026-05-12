@@ -1,9 +1,12 @@
 import { useMemo } from "react";
+import { useLowPower } from "@/hooks/use-low-power";
 
 export function Stars({ count = 40 }: { count?: number }) {
+  const lowPower = useLowPower();
+  const n = lowPower ? Math.max(10, Math.round(count / 2.5)) : count;
   const stars = useMemo(
     () =>
-      Array.from({ length: count }, (_, i) => ({
+      Array.from({ length: n }, (_, i) => ({
         id: i,
         top: Math.random() * 100,
         left: Math.random() * 100,
@@ -11,7 +14,7 @@ export function Stars({ count = 40 }: { count?: number }) {
         delay: Math.random() * 3,
         duration: 2 + Math.random() * 3,
       })),
-    [count],
+    [n],
   );
 
   return (
@@ -27,7 +30,7 @@ export function Stars({ count = 40 }: { count?: number }) {
             height: `${s.size}px`,
             animationDelay: `${s.delay}s`,
             animationDuration: `${s.duration}s`,
-            boxShadow: "0 0 6px rgba(255,255,255,0.8)",
+            ...(lowPower ? null : { boxShadow: "0 0 6px rgba(255,255,255,0.8)" }),
           }}
         />
       ))}

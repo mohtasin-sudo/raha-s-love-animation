@@ -1,9 +1,12 @@
 import { useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useLowPower } from "@/hooks/use-low-power";
 
 export function FloatingHearts({ count = 18 }: { count?: number }) {
   const isMobile = useIsMobile();
-  const n = isMobile ? Math.min(8, Math.round(count / 2.5)) : count;
+  const lowPower = useLowPower();
+  const base = isMobile ? Math.min(8, Math.round(count / 2.5)) : count;
+  const n = lowPower ? Math.max(3, Math.round(base / 2)) : base;
 
   const hearts = useMemo(
     () =>
@@ -28,7 +31,7 @@ export function FloatingHearts({ count = 18 }: { count?: number }) {
             fontSize: `${h.size}px`,
             animation: `float-up ${h.duration}s linear ${h.delay}s infinite`,
             willChange: "transform, opacity",
-            ...(isMobile
+            ...(isMobile || lowPower
               ? null
               : { filter: "drop-shadow(0 0 10px oklch(0.82 0.14 25 / 0.7))" }),
           }}
