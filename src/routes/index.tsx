@@ -45,34 +45,53 @@ function Index() {
   const [needsUnmute, setNeedsUnmute] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Auto-start music on load; fall back to muted autoplay if blocked
+  // Try autoplay; if blocked (mobile), arm a one-time gesture listener
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
     a.loop = true;
     a.volume = 0.85;
-    a.play().catch(() => {
-      // Browser blocked unmuted autoplay — try muted, then ask for a tap
-      a.muted = true;
-      setNeedsUnmute(true);
-      a.play().catch(() => {});
-    });
 
+    let started = false;
+    const markStarted = () => {
+      started = true;
+      setNeedsUnmute(false);
+    };
+
+    // Attempt 1: unmuted autoplay (works on desktop)
+    a.play()
+      .then(markStarted)
+      .catch(() => {
+        // Attempt 2: muted autoplay (works on most mobile)
+        a.muted = true;
+        a.play()
+          .then(() => {
+            // Sound is silent until first user gesture — show prompt
+            setNeedsUnmute(true);
+          })
+          .catch(() => setNeedsUnmute(true));
+      });
+
+    // First user gesture anywhere → ensure music plays unmuted
     const resume = () => {
       a.muted = false;
       setMuted(false);
       setNeedsUnmute(false);
-      a.play().catch(() => {});
-      window.removeEventListener("pointerdown", resume);
-      window.removeEventListener("keydown", resume);
+      // play() must be called inside the gesture handler — synchronous
+      a.play().then(markStarted).catch(() => {});
     };
-    if (a.muted || a.paused) {
-      window.addEventListener("pointerdown", resume, { once: true });
-      window.addEventListener("keydown", resume, { once: true });
-    }
+    const opts = { once: true, passive: true } as AddEventListenerOptions;
+    window.addEventListener("pointerdown", resume, opts);
+    window.addEventListener("touchstart", resume, opts);
+    window.addEventListener("click", resume, opts);
+    window.addEventListener("keydown", resume, { once: true });
+
     return () => {
       window.removeEventListener("pointerdown", resume);
+      window.removeEventListener("touchstart", resume);
+      window.removeEventListener("click", resume);
       window.removeEventListener("keydown", resume);
+      void started;
     };
   }, []);
 
@@ -99,7 +118,7 @@ function Index() {
 
   return (
     <main className="relative film-grain vignette">
-      <audio ref={audioRef} src={musicSrc} preload="auto" />
+      <audio ref={audioRef} src={musicSrc} preload="auto" loop playsInline />
 
       {!introDone && <CinematicIntro onDone={() => setIntroDone(true)} />}
 
