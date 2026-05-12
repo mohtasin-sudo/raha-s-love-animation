@@ -98,13 +98,6 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
           </AnimatePresence>
         </div>
 
-        {/* Skip */}
-        <button
-          onClick={onDone}
-          className="absolute bottom-3 right-4 z-30 text-[10px] uppercase tracking-[0.4em] text-white/50 hover:text-white"
-        >
-          skip ›
-        </button>
       </motion.div>
     </AnimatePresence>
   );
