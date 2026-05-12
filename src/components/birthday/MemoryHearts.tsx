@@ -26,7 +26,7 @@ export function MemoryHearts() {
           className="text-4xl sm:text-6xl shimmer-text italic"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Little wishes, just for you
+          A few wishes for your year
         </h3>
       </motion.div>
 
