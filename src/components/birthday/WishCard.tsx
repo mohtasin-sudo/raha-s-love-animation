@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 const message =
-  "Raha, every moment with you feels like a soft melody — gentle, warm, unforgettable. On your special day, I wish you endless laughter, dreams that bloom like wildflowers, and a year wrapped in love. Thank you for being the most beautiful chapter in my story.";
+  "Raha, you don't know me the way I know you — and maybe you never will. But from far away, I've watched you laugh, dream, and shine, and somewhere along the way my heart quietly chose you. You don't owe me anything in return. Today I only wish you joy that follows you everywhere, dreams that come true softly, and a year as beautiful as the way I see you. Be happy, Raha. That's all I'll ever ask for.";
 
 export function WishCard() {
   const ref = useRef(null);
