@@ -72,40 +72,46 @@ export function StartGate({ onStart }: { onStart: () => void }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 1 }}
-          className="relative z-10 text-[10px] uppercase tracking-[0.6em] text-white/50 mb-4"
-          style={{ fontFamily: "var(--font-display)" }}
+          className="relative z-10 text-[10px] uppercase tracking-[0.6em] text-white/50 mb-3"
+          style={{ fontFamily: "'Playfair Display', serif" }}
         >
-          ✦  For{" "}
-          <span
-            className="not-italic"
-            style={{
-              fontFamily: "var(--font-script)",
-              fontSize: "1.6em",
-              letterSpacing: "0.02em",
-              background:
-                "linear-gradient(135deg, oklch(0.92 0.13 25), oklch(0.85 0.18 60), oklch(0.92 0.13 25))",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-              textShadow: "0 0 24px oklch(0.85 0.18 25 / 0.6)",
-              padding: "0 0.15em",
-            }}
-          >
-            Raha
-          </span>
-          {"  "}✦
+          ✦  For  ✦
         </motion.p>
 
-        {/* Title */}
+        {/* Raha — hero name */}
         <motion.h1
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ delay: 0.5, duration: 1.1, ease: "easeOut" }}
-          className="relative z-10 mb-3 text-4xl sm:text-6xl italic"
+          initial={{ opacity: 0, y: 30, scale: 0.85, filter: "blur(14px)" }}
+          animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+          transition={{ delay: 0.35, duration: 1.3, ease: [0.2, 0.8, 0.2, 1] }}
+          className="relative z-10 leading-none"
           style={{
-            fontFamily: "var(--font-script)",
+            fontFamily: "'Pinyon Script', cursive",
+            fontSize: "clamp(5.5rem, 22vw, 11rem)",
+            background:
+              "linear-gradient(135deg, oklch(0.95 0.08 30), oklch(0.85 0.18 25), oklch(0.88 0.16 60), oklch(0.95 0.08 30))",
+            backgroundSize: "200% 200%",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            filter:
+              "drop-shadow(0 0 28px oklch(0.85 0.18 25 / 0.55)) drop-shadow(0 0 50px oklch(0.78 0.18 10 / 0.35))",
+            paddingBottom: "0.1em",
+          }}
+        >
+          Raha
+        </motion.h1>
+
+        {/* Subtitle */}
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0, duration: 1, ease: "easeOut" }}
+          className="relative z-10 mt-2 mb-3 text-2xl sm:text-3xl italic"
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: 300,
             color: "oklch(0.97 0.05 30)",
-            textShadow: "0 0 30px oklch(0.85 0.15 25 / 0.6)",
+            letterSpacing: "0.02em",
           }}
         >
           A little surprise
