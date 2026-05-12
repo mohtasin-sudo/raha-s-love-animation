@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 const message =
-  "Raha, you don't know me the way I know you — and maybe you never will. But from far away, I've watched you laugh, dream, and shine, and somewhere along the way my heart quietly chose you. You don't owe me anything in return. Today I only wish you joy that follows you everywhere, dreams that come true softly, and a year as beautiful as the way I see you. Be happy, Raha. That's all I'll ever ask for.";
+  "Raha, you'll probably never read this — and even if you do, you won't know it was me. I'm just someone who started liking you from a distance and never really stopped. I know you don't feel the same, and that's okay. I'm not writing this to ask for anything. I only wanted to say… the world is a little softer because you're in it. So today, on your birthday, I'm not wishing for you to be mine. I'm wishing for you to be happy — really, truly happy. That's enough for me.";
 
 export function WishCard() {
   const ref = useRef(null);
