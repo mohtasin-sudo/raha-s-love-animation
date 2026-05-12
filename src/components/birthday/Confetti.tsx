@@ -91,7 +91,7 @@ export function ConfettiFinale() {
       >
         <div className="mx-auto mb-8 h-px w-32 bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
         <p className="text-base italic text-white/60" style={{ fontFamily: "var(--font-serif)" }}>
-          From a distance, with all my heart —
+          Quietly wishing you well —
         </p>
         <p
           className="mt-3 text-3xl sm:text-5xl shimmer-text"
