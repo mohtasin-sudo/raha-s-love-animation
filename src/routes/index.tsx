@@ -50,7 +50,7 @@ function Index() {
     const a = audioRef.current;
     if (!a) return;
     a.loop = true;
-    a.volume = 0.55;
+    a.volume = 0.85;
     a.play().catch(() => {
       // Browser blocked unmuted autoplay — try muted, then ask for a tap
       a.muted = true;
