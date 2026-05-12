@@ -125,6 +125,7 @@ function Index() {
       <audio ref={audioRef} src={musicSrc} preload="auto" loop playsInline />
 
       {!introDone && <CinematicIntro onDone={() => setIntroDone(true)} />}
+      {introDone && <ScrollMascot />}
 
       <FloatingHearts count={22} />
       <div className="relative z-10">
