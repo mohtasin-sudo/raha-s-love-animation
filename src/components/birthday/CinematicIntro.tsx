@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const lines = [
   "Today is your day, Raha.",
@@ -12,6 +12,9 @@ const lines = [
 export function CinematicIntro({ onDone }: { onDone: () => void }) {
   const [step, setStep] = useState(0);
   const [closing, setClosing] = useState(false);
+  // Keep onDone stable across parent re-renders so the timer chain isn't restarted
+  const onDoneRef = useRef(onDone);
+  onDoneRef.current = onDone;
 
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = [];
@@ -26,9 +29,9 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
       acc += d;
     });
     timers.push(setTimeout(() => setClosing(true), acc + 400));
-    timers.push(setTimeout(() => onDone(), acc + 1600));
+    timers.push(setTimeout(() => onDoneRef.current(), acc + 1600));
     return () => timers.forEach(clearTimeout);
-  }, [onDone]);
+  }, []);
 
   return (
     <AnimatePresence>
