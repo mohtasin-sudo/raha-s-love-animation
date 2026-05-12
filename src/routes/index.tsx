@@ -45,6 +45,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [introDone, setIntroDone] = useState(false);
+  const handleIntroDone = useCallback(() => setIntroDone(true), []);
   const [muted, setMuted] = useState(false);
   const [needsUnmute, setNeedsUnmute] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -126,18 +127,20 @@ function Index() {
     <main className="relative film-grain vignette">
       <audio ref={audioRef} src={musicSrc} preload="auto" loop playsInline />
 
-      {!introDone && <CinematicIntro onDone={() => setIntroDone(true)} />}
+      {!introDone && <CinematicIntro onDone={handleIntroDone} />}
       {introDone && <ScrollMascot />}
 
       <FloatingHearts count={22} />
       <div className="relative z-10">
         <Hero />
-        <WishCard />
-        <Constellation />
-        <Cake />
-        <MemoryHearts />
-        <GiftBox />
-        <ConfettiFinale />
+        <Suspense fallback={null}>
+          <WishCard />
+          <Constellation />
+          <Cake />
+          <MemoryHearts />
+          <GiftBox />
+          <ConfettiFinale />
+        </Suspense>
       </div>
 
       <button
