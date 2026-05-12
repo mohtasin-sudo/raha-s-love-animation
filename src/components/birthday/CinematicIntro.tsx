@@ -15,9 +15,9 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
 
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = [];
-    // ~75ms per character, min 2.8s, max 6s — gives time to actually read
+    // ~120ms per character, min 4s, max 9s — comfortable for slow readers
     const durations = lines.map((l) =>
-      Math.min(6000, Math.max(2800, l.length * 75 + 1200)),
+      Math.min(9000, Math.max(4000, l.length * 120 + 1800)),
     );
     let acc = 600; // small initial delay
     durations.forEach((d, i) => {
