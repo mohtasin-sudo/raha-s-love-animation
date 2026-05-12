@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 
 const lines = [
   "Today is your day, Raha.",
-  "We don't really know each other.",
-  "And maybe we never will.",
+  "We know each other,",
+  "but only a little.",
   "But somewhere, quietly,",
   "someone is wishing you well.",
 ];
