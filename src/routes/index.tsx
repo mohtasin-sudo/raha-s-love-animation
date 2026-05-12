@@ -9,7 +9,7 @@ import { GiftBox } from "@/components/birthday/GiftBox";
 import { ConfettiFinale } from "@/components/birthday/Confetti";
 import { FloatingHearts } from "@/components/birthday/FloatingHearts";
 import { CinematicIntro } from "@/components/birthday/CinematicIntro";
-import { StartGate } from "@/components/birthday/StartGate";
+
 import musicSrc from "@/assets/birthday-music.mp3";
 
 export const Route = createFileRoute("/")({
