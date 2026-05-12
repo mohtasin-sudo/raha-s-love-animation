@@ -147,10 +147,22 @@ export function Constellation() {
           <motion.h2
             aria-label={NAME}
             className="relative text-[clamp(4.5rem,20vw,10rem)] leading-none"
-            initial={{ backgroundPosition: "0% 50%" }}
-            whileInView={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+            initial={{ opacity: 0, y: 30, scale: 0.85, filter: "blur(14px)" }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              filter: "blur(0px)",
+              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            }}
             viewport={{ once: true }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear", delay: 2 }}
+            transition={{
+              opacity: { duration: 1.4, delay: 0.4, ease: [0.2, 0.8, 0.2, 1] },
+              y: { duration: 1.4, delay: 0.4, ease: [0.2, 0.8, 0.2, 1] },
+              scale: { duration: 1.4, delay: 0.4, ease: [0.2, 0.8, 0.2, 1] },
+              filter: { duration: 1.4, delay: 0.4, ease: [0.2, 0.8, 0.2, 1] },
+              backgroundPosition: { duration: 8, repeat: Infinity, ease: "linear", delay: 2 },
+            }}
             style={{
               fontFamily: "'Pinyon Script', cursive",
               fontWeight: 400,
@@ -165,19 +177,7 @@ export function Constellation() {
               paddingBottom: "0.1em",
             }}
           >
-            {NAME.split("").map((ch, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 30, filter: "blur(14px)", scale: 0.6 }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.1, delay: 0.4 + i * 0.25, ease: [0.2, 0.8, 0.2, 1] }}
-                className="inline-block"
-                style={{ transformOrigin: "bottom center" }}
-              >
-                {ch}
-              </motion.span>
-            ))}
+            {NAME}
           </motion.h2>
 
           <motion.span
