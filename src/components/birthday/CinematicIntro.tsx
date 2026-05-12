@@ -2,11 +2,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const lines = [
-  "There's a girl named Raha...",
-  "She doesn't know how much she means to me.",
-  "She may never feel the same —",
-  "and yet, from a quiet distance,",
-  "my heart still chooses her, every single day.",
+  "Today is your day, Raha.",
+  "We don't really know each other.",
+  "And maybe we never will.",
+  "But somewhere, quietly,",
+  "someone is wishing you well.",
 ];
 
 export function CinematicIntro({ onDone }: { onDone: () => void }) {
