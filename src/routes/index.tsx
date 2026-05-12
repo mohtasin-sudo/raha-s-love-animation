@@ -4,9 +4,7 @@ import { Hero } from "@/components/birthday/Hero";
 import { FloatingHearts } from "@/components/birthday/FloatingHearts";
 import { CinematicIntro } from "@/components/birthday/CinematicIntro";
 import { ScrollMascot } from "@/components/birthday/ScrollMascot";
-import { StartGate } from "@/components/birthday/StartGate";
 
-// Below-the-fold sections — code-split so the first paint is just intro + Hero
 const WishCard = lazy(() => import("@/components/birthday/WishCard").then(m => ({ default: m.WishCard })));
 const Cake = lazy(() => import("@/components/birthday/Cake").then(m => ({ default: m.Cake })));
 const Constellation = lazy(() => import("@/components/birthday/Constellation").then(m => ({ default: m.Constellation })));
@@ -45,20 +43,38 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const [started, setStarted] = useState(false);
   const [introDone, setIntroDone] = useState(false);
   const handleIntroDone = useCallback(() => setIntroDone(true), []);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Prime the audio element early so it's ready to play instantly on tap
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
     a.loop = true;
-    a.muted = false;
-    a.defaultMuted = false;
     a.volume = 0.85;
+    a.defaultMuted = false;
+    a.muted = false;
     try { a.load(); } catch {}
+
+    // Try unmuted autoplay first. If the browser blocks it (mobile),
+    // fall back to muted autoplay so the film still plays, and silently
+    // unmute on the first user interaction — no visible button needed.
+    let unlocked = false;
+    a.play().catch(() => {
+      a.muted = true;
+      a.play().catch(() => {});
+      const unlock = () => {
+        if (unlocked) return;
+        unlocked = true;
+        a.muted = false;
+        a.play().catch(() => {});
+      };
+      const opts = { once: true, passive: true } as AddEventListenerOptions;
+      window.addEventListener("pointerdown", unlock, opts);
+      window.addEventListener("touchstart", unlock, opts);
+      window.addEventListener("click", unlock, opts);
+      window.addEventListener("keydown", unlock, { once: true });
+    });
   }, []);
 
   // Soft volume ramp once intro finishes
@@ -74,27 +90,11 @@ function Index() {
     return () => clearInterval(id);
   }, [introDone]);
 
-  // Start audio (unmuted) inside the user gesture, then begin the intro
-  const handleBegin = useCallback(() => {
-    const a = audioRef.current;
-    if (a) {
-      a.muted = false;
-      a.defaultMuted = false;
-      // play() must be called synchronously inside the gesture handler
-      a.play().catch(() => {
-        // Last resort: try once more on next tick
-        setTimeout(() => a.play().catch(() => {}), 50);
-      });
-    }
-    setStarted(true);
-  }, []);
-
   return (
     <main className="relative film-grain vignette">
       <audio ref={audioRef} src={musicSrc} preload="auto" loop playsInline />
 
-      {!started && <StartGate onStart={handleBegin} />}
-      {started && !introDone && <CinematicIntro onDone={handleIntroDone} />}
+      {!introDone && <CinematicIntro onDone={handleIntroDone} />}
       {introDone && <ScrollMascot />}
 
       <FloatingHearts count={22} />
