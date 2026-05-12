@@ -4,6 +4,7 @@ import { Hero } from "@/components/birthday/Hero";
 import { FloatingHearts } from "@/components/birthday/FloatingHearts";
 import { CinematicIntro } from "@/components/birthday/CinematicIntro";
 import { ScrollMascot } from "@/components/birthday/ScrollMascot";
+import { StartGate } from "@/components/birthday/StartGate";
 
 const WishCard = lazy(() => import("@/components/birthday/WishCard").then(m => ({ default: m.WishCard })));
 const Cake = lazy(() => import("@/components/birthday/Cake").then(m => ({ default: m.Cake })));
@@ -43,38 +44,20 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [started, setStarted] = useState(false);
   const [introDone, setIntroDone] = useState(false);
   const handleIntroDone = useCallback(() => setIntroDone(true), []);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // Prime the audio element so it's instantly ready on tap
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
     a.loop = true;
-    a.volume = 0.85;
-    a.defaultMuted = false;
     a.muted = false;
+    a.defaultMuted = false;
+    a.volume = 0.85;
     try { a.load(); } catch {}
-
-    // Try unmuted autoplay first. If the browser blocks it (mobile),
-    // fall back to muted autoplay so the film still plays, and silently
-    // unmute on the first user interaction — no visible button needed.
-    let unlocked = false;
-    a.play().catch(() => {
-      a.muted = true;
-      a.play().catch(() => {});
-      const unlock = () => {
-        if (unlocked) return;
-        unlocked = true;
-        a.muted = false;
-        a.play().catch(() => {});
-      };
-      const opts = { once: true, passive: true } as AddEventListenerOptions;
-      window.addEventListener("pointerdown", unlock, opts);
-      window.addEventListener("touchstart", unlock, opts);
-      window.addEventListener("click", unlock, opts);
-      window.addEventListener("keydown", unlock, { once: true });
-    });
   }, []);
 
   // Soft volume ramp once intro finishes
@@ -90,11 +73,25 @@ function Index() {
     return () => clearInterval(id);
   }, [introDone]);
 
+  // Begin tap = user gesture → unlocks unmuted audio + starts intro
+  const handleBegin = useCallback(() => {
+    const a = audioRef.current;
+    if (a) {
+      a.muted = false;
+      a.defaultMuted = false;
+      a.play().catch(() => {
+        setTimeout(() => a.play().catch(() => {}), 50);
+      });
+    }
+    setStarted(true);
+  }, []);
+
   return (
     <main className="relative film-grain vignette">
       <audio ref={audioRef} src={musicSrc} preload="auto" loop playsInline />
 
-      {!introDone && <CinematicIntro onDone={handleIntroDone} />}
+      {!started && <StartGate onStart={handleBegin} />}
+      {started && !introDone && <CinematicIntro onDone={handleIntroDone} />}
       {introDone && <ScrollMascot />}
 
       <FloatingHearts count={22} />
