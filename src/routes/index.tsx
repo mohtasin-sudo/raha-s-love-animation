@@ -34,6 +34,7 @@ export const Route = createFileRoute("/")({
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Caveat:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap",
       },
+      { rel: "preload", as: "audio", href: musicSrc },
     ],
   }),
   component: Index,
@@ -51,6 +52,8 @@ function Index() {
     if (!a) return;
     a.loop = true;
     a.volume = 0.85;
+    // Force the browser to start fetching the file immediately
+    try { a.load(); } catch {}
 
     let started = false;
     const markStarted = () => {
