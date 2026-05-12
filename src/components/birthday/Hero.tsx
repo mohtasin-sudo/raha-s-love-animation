@@ -47,7 +47,7 @@ export function Hero() {
           className="text-[10px] uppercase tracking-[0.7em]"
           style={{ color: "var(--gold)", fontFamily: "var(--font-display)" }}
         >
-          A Love Story
+          For Raha
         </p>
         <span className="h-px w-10 bg-gradient-to-l from-transparent to-[var(--gold)]" />
       </motion.div>
