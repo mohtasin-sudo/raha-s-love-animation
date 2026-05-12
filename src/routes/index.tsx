@@ -143,13 +143,16 @@ function Index() {
         </Suspense>
       </div>
 
-      <button
-        onClick={toggleMute}
-        aria-label={muted || needsUnmute ? "Unmute music" : "Mute music"}
-        className="fixed bottom-4 right-4 z-[150] rounded-full border border-white/20 bg-black/40 px-3 py-2 text-xs text-white/80 backdrop-blur hover:bg-black/60"
-      >
-        {muted || needsUnmute ? "🔇 tap for sound" : "🔊 music"}
-      </button>
+      {needsUnmute && (
+        <button
+          onClick={toggleMute}
+          aria-label="Unmute music"
+          className="fixed bottom-4 right-4 z-[150] rounded-full border border-white/20 bg-black/40 px-3 py-2 text-xs text-white/80 backdrop-blur hover:bg-black/60"
+        >
+          🔇 tap for sound
+        </button>
+      )}
+      {void muted}
     </main>
   );
 }
