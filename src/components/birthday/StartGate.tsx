@@ -16,16 +16,16 @@ export function StartGate({ onStart }: { onStart: () => void }) {
           className="text-[10px] uppercase tracking-[0.6em] text-white/40 mb-6"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          A film for Raha
+          For Raha
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="mb-10 text-4xl sm:text-6xl shimmer-text"
-          style={{ fontFamily: "var(--font-display)" }}
+          className="mb-10 text-3xl sm:text-5xl"
+          style={{ fontFamily: "var(--font-display)", color: "oklch(0.95 0.04 30)", letterSpacing: "0.02em" }}
         >
-          Press play with your heart
+          A small birthday note
         </motion.h1>
         <motion.button
           initial={{ opacity: 0, scale: 0.9 }}
