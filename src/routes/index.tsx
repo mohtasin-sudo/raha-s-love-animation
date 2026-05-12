@@ -4,6 +4,7 @@ import { Hero } from "@/components/birthday/Hero";
 import { FloatingHearts } from "@/components/birthday/FloatingHearts";
 import { CinematicIntro } from "@/components/birthday/CinematicIntro";
 import { ScrollMascot } from "@/components/birthday/ScrollMascot";
+import { StartGate } from "@/components/birthday/StartGate";
 
 // Below-the-fold sections — code-split so the first paint is just intro + Hero
 const WishCard = lazy(() => import("@/components/birthday/WishCard").then(m => ({ default: m.WishCard })));
@@ -44,12 +45,12 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [started, setStarted] = useState(false);
   const [introDone, setIntroDone] = useState(false);
   const handleIntroDone = useCallback(() => setIntroDone(true), []);
-  const [needsUnmute, setNeedsUnmute] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Try autoplay; if blocked (mobile), arm a one-time gesture listener
+  // Prime the audio element early so it's ready to play instantly on tap
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
@@ -57,50 +58,8 @@ function Index() {
     a.muted = false;
     a.defaultMuted = false;
     a.volume = 0.85;
-    // Force the browser to start fetching the file immediately
     try { a.load(); } catch {}
-
-    let started = false;
-    const markStarted = () => {
-      started = true;
-      setNeedsUnmute(false);
-    };
-
-    // Attempt 1: unmuted autoplay (works on desktop)
-    a.play()
-      .then(markStarted)
-      .catch(() => setNeedsUnmute(true));
-
-    // First user gesture anywhere → ensure music plays unmuted
-    const resume = () => {
-      a.muted = false;
-      setNeedsUnmute(false);
-      // play() must be called inside the gesture handler — synchronous
-      a.play().then(markStarted).catch(() => {});
-    };
-    const opts = { once: true, passive: true } as AddEventListenerOptions;
-    window.addEventListener("pointerdown", resume, opts);
-    window.addEventListener("touchstart", resume, opts);
-    window.addEventListener("click", resume, opts);
-    window.addEventListener("keydown", resume, { once: true });
-
-    return () => {
-      window.removeEventListener("pointerdown", resume);
-      window.removeEventListener("touchstart", resume);
-      window.removeEventListener("click", resume);
-      window.removeEventListener("keydown", resume);
-      void started;
-    };
   }, []);
-
-  const enableSound = () => {
-    const a = audioRef.current;
-    if (!a) return;
-    a.muted = false;
-    a.defaultMuted = false;
-    setNeedsUnmute(false);
-    a.play().catch(() => setNeedsUnmute(true));
-  };
 
   // Soft volume ramp once intro finishes
   useEffect(() => {
@@ -115,11 +74,27 @@ function Index() {
     return () => clearInterval(id);
   }, [introDone]);
 
+  // Start audio (unmuted) inside the user gesture, then begin the intro
+  const handleBegin = useCallback(() => {
+    const a = audioRef.current;
+    if (a) {
+      a.muted = false;
+      a.defaultMuted = false;
+      // play() must be called synchronously inside the gesture handler
+      a.play().catch(() => {
+        // Last resort: try once more on next tick
+        setTimeout(() => a.play().catch(() => {}), 50);
+      });
+    }
+    setStarted(true);
+  }, []);
+
   return (
     <main className="relative film-grain vignette">
       <audio ref={audioRef} src={musicSrc} preload="auto" loop playsInline />
 
-      {!introDone && <CinematicIntro onDone={handleIntroDone} />}
+      {!started && <StartGate onStart={handleBegin} />}
+      {started && !introDone && <CinematicIntro onDone={handleIntroDone} />}
       {introDone && <ScrollMascot />}
 
       <FloatingHearts count={22} />
@@ -134,16 +109,6 @@ function Index() {
           <ConfettiFinale />
         </Suspense>
       </div>
-
-      {needsUnmute && (
-        <button
-          onClick={enableSound}
-          aria-label="Unmute music"
-          className="fixed bottom-4 right-4 z-[150] rounded-full border border-white/20 bg-black/40 px-3 py-2 text-xs text-white/80 backdrop-blur hover:bg-black/60"
-        >
-          🔇 tap for sound
-        </button>
-      )}
     </main>
   );
 }
