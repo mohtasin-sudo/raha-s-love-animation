@@ -9,25 +9,23 @@ export function Cake() {
     setCandles((c) => c.map((v, idx) => (idx === i ? false : v)));
 
   return (
-    <section className="relative px-6 py-32 text-center overflow-hidden">
+    <section className="relative editorial-section px-6 text-center overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-12"
+        className="mb-12 flex flex-col items-center"
       >
-        <p className="text-[10px] uppercase tracking-[0.6em] text-white/40 mb-2"
-          style={{ fontFamily: "var(--font-display)" }}>
-          Chapter Three
-        </p>
+        <p className="kicker mb-4">Chapter Three · The Wish</p>
+        <span className="rule rule-center mb-6" />
         <h3
-          className="text-4xl sm:text-5xl gold-text italic"
-          style={{ fontFamily: "var(--font-display)" }}
+          className="text-4xl sm:text-5xl italic"
+          style={{ fontFamily: "var(--font-display)", color: "var(--ivory)", fontWeight: 500 }}
         >
           Make a wish
         </h3>
-        <p className="mt-3 text-sm text-white/60" style={{ fontFamily: "var(--font-hand)", fontSize: "1.25rem" }}>
-          {allOut ? "✨ wish made — keep it close to your heart" : "tap each candle to blow it out"}
+        <p className="mt-4 text-base italic" style={{ fontFamily: "var(--font-serif)", color: "var(--ivory-soft)" }}>
+          {allOut ? "wish made — keep it close to your heart" : "tap each candle to blow it out"}
         </p>
       </motion.div>
 

@@ -11,20 +11,18 @@ const wishes = [
 
 export function MemoryHearts() {
   return (
-    <section className="relative px-6 py-32">
+    <section className="relative editorial-section px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-16 text-center"
+        className="mb-16 flex flex-col items-center text-center"
       >
-        <p className="text-[10px] uppercase tracking-[0.6em] text-white/40 mb-2"
-          style={{ fontFamily: "var(--font-display)" }}>
-          Chapter Two
-        </p>
+        <p className="kicker mb-4">Chapter Two · Wishes</p>
+        <span className="rule rule-center mb-6" />
         <h3
-          className="text-4xl sm:text-6xl shimmer-text italic"
-          style={{ fontFamily: "var(--font-display)" }}
+          className="text-4xl sm:text-5xl italic"
+          style={{ fontFamily: "var(--font-display)", color: "var(--ivory)", fontWeight: 500 }}
         >
           A few wishes for your year
         </h3>
@@ -39,12 +37,11 @@ export function MemoryHearts() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, delay: i * 0.12, type: "spring" }}
             whileHover={{ scale: 1.06, rotate: 0, y: -6 }}
-            className="group relative rounded-3xl border p-7 backdrop-blur-md overflow-hidden"
+            className="group relative rounded-sm border p-8 overflow-hidden"
             style={{
-              background:
-                "linear-gradient(145deg, oklch(0.30 0.10 320 / 0.55), oklch(0.22 0.10 340 / 0.45))",
-              borderColor: "oklch(0.84 0.14 25 / 0.4)",
-              boxShadow: "0 20px 60px oklch(0.10 0.06 300 / 0.5)",
+              background: "oklch(0.20 0.02 60 / 0.45)",
+              borderColor: "var(--rule)",
+              boxShadow: "0 20px 50px -20px oklch(0 0 0 / 0.5)",
             }}
           >
             <div

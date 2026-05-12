@@ -26,6 +26,9 @@
   --color-rose-glow: var(--rose-glow);
   --color-gold: var(--gold);
   --color-night: var(--night);
+  --color-ivory: var(--ivory);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
   --font-display: var(--font-display);
   --font-script: var(--font-script);
   --font-serif: var(--font-serif);
@@ -33,53 +36,62 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 
-  --night: oklch(0.14 0.06 305);
-  --night-deep: oklch(0.09 0.04 300);
-  --rose: oklch(0.72 0.19 10);
-  --rose-glow: oklch(0.84 0.14 25);
-  --gold: oklch(0.88 0.14 85);
-  --plum: oklch(0.32 0.13 340);
-  --ink: oklch(0.18 0.04 310);
+  /* Editorial palette — deep ink + warm ivory + restrained antique gold */
+  --night: oklch(0.16 0.015 60);
+  --night-deep: oklch(0.10 0.012 60);
+  --ivory: oklch(0.97 0.018 80);
+  --ivory-soft: oklch(0.93 0.025 75);
+  --paper: oklch(0.96 0.022 78);
+  --ink: oklch(0.18 0.02 60);
+  --ink-soft: oklch(0.32 0.018 60);
+  --rose: oklch(0.62 0.14 20);
+  --rose-glow: oklch(0.78 0.10 30);
+  --gold: oklch(0.74 0.10 75);
+  --gold-deep: oklch(0.55 0.10 70);
+  --plum: oklch(0.30 0.05 30);
+  --rule: oklch(0.97 0.02 80 / 0.18);
 
   --background: var(--night);
-  --foreground: oklch(0.97 0.02 20);
-  --card: oklch(0.24 0.08 315 / 0.6);
-  --card-foreground: oklch(0.97 0.02 20);
-  --primary: var(--rose);
+  --foreground: var(--ivory);
+  --card: oklch(0.20 0.02 60 / 0.55);
+  --card-foreground: var(--ivory);
+  --primary: var(--gold);
   --primary-foreground: var(--night);
-  --secondary: oklch(0.28 0.08 315);
-  --secondary-foreground: oklch(0.97 0.02 20);
-  --muted: oklch(0.28 0.08 315);
-  --muted-foreground: oklch(0.78 0.04 20);
+  --secondary: oklch(0.24 0.02 60);
+  --secondary-foreground: var(--ivory);
+  --muted: oklch(0.24 0.02 60);
+  --muted-foreground: oklch(0.78 0.02 60);
   --accent: var(--gold);
   --accent-foreground: var(--night);
-  --border: oklch(0.97 0.02 20 / 0.12);
-  --input: oklch(0.97 0.02 20 / 0.15);
-  --ring: var(--rose);
+  --border: var(--rule);
+  --input: oklch(0.97 0.02 80 / 0.12);
+  --ring: var(--gold);
 
   --gradient-romance:
-    radial-gradient(ellipse at 20% 0%, oklch(0.38 0.18 5 / 0.55), transparent 55%),
-    radial-gradient(ellipse at 80% 100%, oklch(0.30 0.16 320 / 0.7), transparent 55%),
-    radial-gradient(ellipse at 50% 50%, oklch(0.20 0.10 320 / 0.4), transparent 70%),
-    linear-gradient(180deg, var(--night), var(--night-deep));
-  --shadow-glow: 0 0 60px oklch(0.72 0.19 10 / 0.5), 0 0 140px oklch(0.84 0.14 25 / 0.3);
+    radial-gradient(ellipse at 50% -10%, oklch(0.28 0.04 40 / 0.55), transparent 60%),
+    radial-gradient(ellipse at 50% 110%, oklch(0.22 0.03 60 / 0.5), transparent 65%),
+    linear-gradient(180deg, var(--night) 0%, var(--night-deep) 100%);
+  --shadow-glow: 0 1px 0 oklch(0.97 0.02 80 / 0.04), 0 30px 80px -30px oklch(0 0 0 / 0.5);
+  --shadow-paper: 0 30px 60px -20px oklch(0 0 0 / 0.45), 0 8px 18px -10px oklch(0 0 0 / 0.35);
 
-  --font-display: "Italiana", "Playfair Display", ui-serif, Georgia, serif;
+  /* Editorial typography — Playfair for display, Cormorant for body */
+  --font-display: "Playfair Display", "Italiana", ui-serif, Georgia, serif;
   --font-serif: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
   --font-script: "Pinyon Script", "Dancing Script", cursive;
   --font-hand: "Caveat", "Dancing Script", cursive;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
 
   --popover: var(--card);
   --popover-foreground: var(--card-foreground);
   --destructive: oklch(0.6 0.24 27);
-  --destructive-foreground: oklch(0.97 0.02 20);
+  --destructive-foreground: var(--ivory);
   --chart-1: var(--rose);
   --chart-2: var(--gold);
   --chart-3: var(--rose-glow);
-  --chart-4: oklch(0.5 0.15 320);
-  --chart-5: oklch(0.65 0.12 350);
+  --chart-4: oklch(0.5 0.06 60);
+  --chart-5: oklch(0.65 0.08 40);
   --sidebar: var(--card);
   --sidebar-foreground: var(--card-foreground);
   --sidebar-primary: var(--primary);
@@ -90,33 +102,71 @@
   --sidebar-ring: var(--ring);
 }
 
-.dark { --background: var(--night); --foreground: oklch(0.97 0.02 20); }
+.dark { --background: var(--night); --foreground: var(--ivory); }
 
 @layer base {
   * { border-color: var(--color-border); }
-  html, body { background: var(--gradient-romance); color: var(--color-foreground); min-height: 100dvh; }
+  html, body {
+    background: var(--gradient-romance);
+    color: var(--color-foreground);
+    min-height: 100dvh;
+  }
   body {
     font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.7;
     overflow-x: hidden;
     background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
+  ::selection { background: var(--gold); color: var(--night); }
 }
 
-/* Film grain overlay */
+/* Film grain overlay (lighter, more editorial) */
 .film-grain::before {
   content: "";
   position: fixed; inset: 0; pointer-events: none; z-index: 100;
-  opacity: 0.08; mix-blend-mode: overlay;
+  opacity: 0.04; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
-  animation: grain 0.6s steps(4) infinite;
+  animation: grain 1.2s steps(4) infinite;
 }
 
-/* Vignette */
+/* Soft vignette */
 .vignette::after {
   content: "";
   position: fixed; inset: 0; pointer-events: none; z-index: 90;
-  background: radial-gradient(ellipse at center, transparent 40%, oklch(0 0 0 / 0.55) 100%);
+  background: radial-gradient(ellipse at center, transparent 55%, oklch(0 0 0 / 0.4) 100%);
 }
+
+/* Editorial helpers */
+.kicker {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.rule {
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.7;
+}
+.rule-center { margin-left: auto; margin-right: auto; }
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  font-size: 4.2em;
+  float: left;
+  line-height: 0.85;
+  padding: 0.08em 0.12em 0 0;
+  color: var(--rose);
+  font-weight: 500;
+}
+.editorial-section { padding-block: clamp(5rem, 10vw, 9rem); }
+.measure { max-width: 38rem; margin-inline: auto; }
 
 @keyframes grain {
   0%,100% { transform: translate(0,0) }

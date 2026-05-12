@@ -55,15 +55,13 @@ export function ConfettiFinale() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-10"
+        className="mb-10 flex flex-col items-center"
       >
-        <p className="text-[10px] uppercase tracking-[0.6em] text-white/40 mb-2"
-          style={{ fontFamily: "var(--font-display)" }}>
-          Final Scene
-        </p>
+        <p className="kicker mb-4">Final Page</p>
+        <span className="rule rule-center mb-6" />
         <h3
-          className="text-5xl sm:text-7xl shimmer-text italic"
-          style={{ fontFamily: "var(--font-display)" }}
+          className="text-5xl sm:text-7xl italic"
+          style={{ fontFamily: "var(--font-display)", color: "var(--ivory)", fontWeight: 500, letterSpacing: "-0.01em" }}
         >
           Forever begins today
         </h3>
