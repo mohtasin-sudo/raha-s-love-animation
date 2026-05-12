@@ -46,7 +46,6 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [introDone, setIntroDone] = useState(false);
   const handleIntroDone = useCallback(() => setIntroDone(true), []);
-  const [muted, setMuted] = useState(false);
   const [needsUnmute, setNeedsUnmute] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -55,6 +54,8 @@ function Index() {
     const a = audioRef.current;
     if (!a) return;
     a.loop = true;
+    a.muted = false;
+    a.defaultMuted = false;
     a.volume = 0.85;
     // Force the browser to start fetching the file immediately
     try { a.load(); } catch {}
@@ -68,21 +69,11 @@ function Index() {
     // Attempt 1: unmuted autoplay (works on desktop)
     a.play()
       .then(markStarted)
-      .catch(() => {
-        // Attempt 2: muted autoplay (works on most mobile)
-        a.muted = true;
-        a.play()
-          .then(() => {
-            // Sound is silent until first user gesture — show prompt
-            setNeedsUnmute(true);
-          })
-          .catch(() => setNeedsUnmute(true));
-      });
+      .catch(() => setNeedsUnmute(true));
 
     // First user gesture anywhere → ensure music plays unmuted
     const resume = () => {
       a.muted = false;
-      setMuted(false);
       setNeedsUnmute(false);
       // play() must be called inside the gesture handler — synchronous
       a.play().then(markStarted).catch(() => {});
@@ -102,12 +93,13 @@ function Index() {
     };
   }, []);
 
-  const toggleMute = () => {
+  const enableSound = () => {
     const a = audioRef.current;
     if (!a) return;
-    a.muted = !a.muted;
-    setMuted(a.muted);
-    if (!a.muted) a.play().catch(() => {});
+    a.muted = false;
+    a.defaultMuted = false;
+    setNeedsUnmute(false);
+    a.play().catch(() => setNeedsUnmute(true));
   };
 
   // Soft volume ramp once intro finishes
