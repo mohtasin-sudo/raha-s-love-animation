@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 const message =
-  "Raha — happy birthday. You know me, and I know you. Just the two of us in this little secret. I won't sign my name today; let me hide behind a small title — A Silent Admirer — and just say what I mean. I hope this year is gentle to you. I hope your work goes the way you want it to, your people stay close, and the small things keep making you smile. You probably already know who's writing this. That's okay. Today isn't about me. Be happy, Raha. That's the whole wish.";
+  "Raha — happy birthday. We know each other a little, not close, not strangers. I'm not your type, and that's okay; this isn't about that. I just wanted to say something kind on your day, without making it weird. So let me hide behind a small title — A Silent Admirer — and just mean it: I hope this year is gentle to you. I hope your work goes the way you want it to, your people stay close, and the small things keep making you smile. That's the whole wish. Be happy, Raha.";
 
 export function WishCard() {
   const ref = useRef(null);
