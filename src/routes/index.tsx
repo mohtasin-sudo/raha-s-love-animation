@@ -73,23 +73,6 @@ function Index() {
     return () => clearInterval(id);
   }, [introDone]);
 
-  // Auto-begin shortly after page load (audio may stay muted until first tap)
-  useEffect(() => {
-    if (started) return;
-    const id = setTimeout(() => {
-      const a = audioRef.current;
-      if (a) {
-        a.muted = false;
-        a.play().catch(() => {
-          a.muted = true;
-          a.play().catch(() => {});
-        });
-      }
-      setStarted(true);
-    }, 900);
-    return () => clearTimeout(id);
-  }, [started]);
-
   // Begin tap = user gesture → unlocks unmuted audio + starts intro
   const handleBegin = useCallback(() => {
     const a = audioRef.current;

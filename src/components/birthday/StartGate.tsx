@@ -227,25 +227,61 @@ export function StartGate({ onStart }: { onStart: () => void }) {
           made just for you 💖
         </motion.p>
 
-        {/* Cute pulsing Begin button */}
+        {/* Pointing hand above the button — universal "click here" cue */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, 10, 0] }}
+          transition={{
+            opacity: { delay: 1.2, duration: 0.6 },
+            y: { delay: 1.2, duration: 1.2, repeat: Infinity, ease: "easeInOut" },
+          }}
+          className="relative z-10 mb-3 text-4xl sm:text-5xl"
+          style={{ filter: "drop-shadow(0 0 12px oklch(0.85 0.18 25 / 0.7))" }}
+          aria-hidden
+        >
+          👇
+        </motion.div>
+
+        {/* Cute pulsing Begin button — large, unmistakable */}
         <motion.button
           initial={{ opacity: 0, scale: 0.6 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1.1, duration: 0.9, type: "spring", bounce: 0.5 }}
-          whileHover={{ scale: 1.08 }}
+          animate={{ opacity: 1, scale: [1, 1.06, 1] }}
+          transition={{
+            opacity: { delay: 1.1, duration: 0.9 },
+            scale: { delay: 1.6, duration: 1.8, repeat: Infinity, ease: "easeInOut" },
+          }}
+          whileHover={{ scale: 1.12 }}
           whileTap={{ scale: 0.94 }}
           onClick={onStart}
-          aria-label="Begin"
-          className="group relative z-10 rounded-full px-8 py-3.5 text-xs font-medium uppercase tracking-[0.35em] text-white"
+          aria-label="Tap here to begin"
+          className="group relative z-10 rounded-full px-10 sm:px-14 py-5 sm:py-6 text-sm sm:text-base font-bold uppercase tracking-[0.3em] text-white"
           style={{
             background:
               "linear-gradient(135deg, oklch(0.72 0.19 10), oklch(0.82 0.17 25), oklch(0.78 0.15 60))",
             backgroundSize: "200% 200%",
             boxShadow:
-              "0 10px 40px oklch(0.72 0.19 10 / 0.5), 0 0 0 1px rgba(255,255,255,0.2) inset",
+              "0 14px 50px oklch(0.72 0.19 10 / 0.6), 0 0 0 2px rgba(255,255,255,0.25) inset, 0 0 60px oklch(0.85 0.18 25 / 0.5)",
             fontFamily: "var(--font-display)",
           }}
         >
+          {/* Expanding ripple waves — screams "click me" */}
+          {[0, 1, 2].map((i) => (
+            <motion.span
+              key={i}
+              aria-hidden
+              className="absolute inset-0 rounded-full border-2 pointer-events-none"
+              style={{ borderColor: "oklch(0.88 0.16 30 / 0.7)" }}
+              initial={{ scale: 1, opacity: 0.7 }}
+              animate={{ scale: 1.8, opacity: 0 }}
+              transition={{
+                duration: 2.2,
+                repeat: Infinity,
+                ease: "easeOut",
+                delay: 1.6 + i * 0.7,
+              }}
+            />
+          ))}
+
           {/* Animated gradient sweep */}
           <motion.span
             aria-hidden
@@ -261,21 +297,47 @@ export function StartGate({ onStart }: { onStart: () => void }) {
           {/* Pulsing halo */}
           <motion.span
             aria-hidden
-            className="absolute -inset-2 rounded-full"
-            style={{ boxShadow: "0 0 40px oklch(0.85 0.15 25 / 0.7)" }}
-            animate={{ opacity: [0.35, 0.85, 0.35], scale: [1, 1.08, 1] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -inset-3 rounded-full"
+            style={{ boxShadow: "0 0 60px oklch(0.85 0.15 25 / 0.85)" }}
+            animate={{ opacity: [0.4, 0.95, 0.4], scale: [1, 1.1, 1] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
           />
-          <span className="relative z-10 flex items-center gap-2">
+          <span className="relative z-10 flex items-center gap-2.5">
+            <motion.span
+              animate={{ rotate: [0, -10, 10, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              👉
+            </motion.span>
             <span>Tap to Begin</span>
             <motion.span
-              animate={{ x: [0, 4, 0] }}
+              animate={{ x: [0, 4, 0], rotate: [0, 15, 0] }}
               transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
             >
               ✨
             </motion.span>
           </span>
         </motion.button>
+
+        {/* Helper hint right under the button */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{
+            delay: 1.8,
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="relative z-10 mt-5 text-xs sm:text-sm font-medium tracking-[0.25em] uppercase"
+          style={{
+            color: "oklch(0.92 0.14 60)",
+            fontFamily: "var(--font-display)",
+            textShadow: "0 0 12px oklch(0.85 0.18 25 / 0.6)",
+          }}
+        >
+          ✨ tap the button above ✨
+        </motion.p>
 
         {/* Hint */}
         <motion.p
