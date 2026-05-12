@@ -98,15 +98,52 @@ export function Hero() {
         Hope your day is as kind to you as you deserve.
       </motion.p>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 1, 1, 0.4, 1] }}
-        transition={{ delay: 3.6, duration: 3, repeat: Infinity }}
-        className="absolute bottom-8 flex flex-col items-center gap-2 text-[10px] uppercase tracking-[0.5em] text-white/50"
+      {/* Scroll cue — clearer, animated, tappable */}
+      <motion.button
+        type="button"
+        onClick={() => {
+          window.scrollBy({ top: window.innerHeight * 0.9, behavior: "smooth" });
+        }}
+        initial={{ opacity: 0, y: 0 }}
+        animate={{ opacity: 1, y: [0, 8, 0] }}
+        transition={{
+          opacity: { delay: 3, duration: 1 },
+          y: { delay: 3, duration: 1.8, repeat: Infinity, ease: "easeInOut" },
+        }}
+        aria-label="Scroll to read more"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 group"
       >
-        <span>scroll</span>
-        <span className="h-8 w-px bg-gradient-to-b from-white/60 to-transparent" />
-      </motion.div>
+        <span
+          className="text-[10px] uppercase"
+          style={{
+            fontFamily: "var(--font-sans)",
+            letterSpacing: "0.45em",
+            color: "var(--gold)",
+          }}
+        >
+          scroll to read
+        </span>
+        {/* Mouse outline with bouncing dot */}
+        <span
+          className="relative flex h-10 w-6 items-start justify-center rounded-full border"
+          style={{ borderColor: "var(--gold)", borderWidth: "1.5px" }}
+        >
+          <motion.span
+            animate={{ y: [2, 14, 2], opacity: [1, 0.3, 1] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="mt-1.5 block h-1.5 w-1.5 rounded-full"
+            style={{ background: "var(--gold)" }}
+          />
+        </span>
+        {/* Down chevron */}
+        <span
+          className="block text-base leading-none"
+          style={{ color: "var(--gold)", opacity: 0.85 }}
+          aria-hidden
+        >
+          ⌄
+        </span>
+      </motion.button>
     </section>
   );
 }
