@@ -2,9 +2,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const lines = [
-  "In a world full of moments...",
-  "one day shines brighter than the rest.",
-  "A story written in heartbeats —",
+  "There's a girl named Raha...",
+  "She doesn't know how much she means to me.",
+  "She may never feel the same —",
+  "and yet, from a quiet distance,",
+  "my heart still chooses her, every single day.",
 ];
 
 export function CinematicIntro({ onDone }: { onDone: () => void }) {
