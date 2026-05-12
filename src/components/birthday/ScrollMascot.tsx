@@ -8,7 +8,14 @@ export function ScrollMascot() {
 
   useEffect(() => {
     const t = setTimeout(() => setShow(true), 2200);
-    return () => clearTimeout(t);
+    const onScroll = () => {
+      if (window.scrollY > 120) setShow(false);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   const handleClick = () => {
@@ -33,24 +40,35 @@ export function ScrollMascot() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.5, type: "spring", stiffness: 220, damping: 16 }}
-            className="relative mb-20 sm:mb-28 max-w-[12rem] rounded-2xl border px-4 py-3 pointer-events-auto"
-            style={{
-              background: "var(--paper)",
-              borderColor: "oklch(0.85 0.04 70 / 0.7)",
-              color: "var(--ink)",
-              boxShadow: "0 12px 30px -12px oklch(0 0 0 / 0.5)",
-              fontFamily: "var(--font-serif)",
-            }}
+            className="relative mb-20 sm:mb-28 max-w-[13rem] pointer-events-auto"
+            style={{ fontFamily: "var(--font-serif)" }}
           >
-            <p className="text-[0.95rem] leading-snug italic">
-              psst… keep scrolling, there's more for you ↓
-            </p>
+            <div
+              className="rounded-[14px] border px-4 py-3 backdrop-blur-md"
+              style={{
+                background: "oklch(0.18 0.02 60 / 0.78)",
+                borderColor: "oklch(0.74 0.10 75 / 0.45)",
+                color: "var(--ivory)",
+                boxShadow: "0 18px 40px -18px oklch(0 0 0 / 0.7)",
+              }}
+            >
+              <span
+                className="block mb-1 text-[9px] tracking-[0.32em] uppercase"
+                style={{ fontFamily: "var(--font-sans)", color: "var(--gold)" }}
+              >
+                A whisper
+              </span>
+              <p className="text-[0.95rem] leading-snug italic" style={{ color: "var(--ivory-soft)" }}>
+                there's more below — keep going
+                <span className="ml-1" style={{ color: "var(--gold)" }}>↓</span>
+              </p>
+            </div>
             {/* Bubble tail */}
             <span
-              className="absolute -bottom-2 left-8 h-4 w-4 rotate-45 border-b border-r"
+              className="absolute -bottom-1.5 left-8 h-3 w-3 rotate-45 border-b border-r"
               style={{
-                background: "var(--paper)",
-                borderColor: "oklch(0.85 0.04 70 / 0.7)",
+                background: "oklch(0.18 0.02 60 / 0.78)",
+                borderColor: "oklch(0.74 0.10 75 / 0.45)",
               }}
             />
             {/* Close */}
@@ -64,9 +82,9 @@ export function ScrollMascot() {
               aria-label="Dismiss"
               className="absolute -top-2 -right-2 h-6 w-6 rounded-full text-xs leading-none border"
               style={{
-                background: "var(--ivory)",
-                borderColor: "oklch(0.85 0.04 70 / 0.7)",
-                color: "var(--ink-soft)",
+                background: "var(--night)",
+                borderColor: "oklch(0.74 0.10 75 / 0.5)",
+                color: "var(--gold)",
               }}
             >
               ×
