@@ -20,7 +20,7 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
     const timers: ReturnType<typeof setTimeout>[] = [];
     // ~75ms per character, min 3.2s, max 6.5s — relaxed reading pace
     const durations = lines.map((l) =>
-      Math.min(6500, Math.max(3200, l.length * 75 + 1600)),
+      Math.min(4200, Math.max(2000, l.length * 45 + 900)),
     );
     let acc = 600; // small initial delay
     durations.forEach((d, i) => {
