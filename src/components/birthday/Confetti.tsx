@@ -91,13 +91,13 @@ export function ConfettiFinale() {
       >
         <div className="mx-auto mb-8 h-px w-32 bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
         <p className="text-base italic text-white/60" style={{ fontFamily: "var(--font-serif)" }}>
-          Quietly wishing you well —
+          Quietly yours —
         </p>
         <p
           className="mt-3 text-3xl sm:text-5xl shimmer-text"
           style={{ fontFamily: "var(--font-script)" }}
         >
-          Coder on Fall in Love
+          A Premik Coder
         </p>
         <p
           className="mt-6 text-[10px] uppercase tracking-[0.5em] text-white/40"
