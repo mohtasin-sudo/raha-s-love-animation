@@ -9,6 +9,7 @@ import { GiftBox } from "@/components/birthday/GiftBox";
 import { ConfettiFinale } from "@/components/birthday/Confetti";
 import { FloatingHearts } from "@/components/birthday/FloatingHearts";
 import { CinematicIntro } from "@/components/birthday/CinematicIntro";
+import { ScrollMascot } from "@/components/birthday/ScrollMascot";
 
 import musicSrc from "@/assets/birthday-music.mp3";
 
