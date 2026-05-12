@@ -24,18 +24,19 @@ const totalW = CHARS.length * LETTER_W + (CHARS.length - 1) * GAP;
 
 export function Constellation() {
   return (
-    <section className="relative px-6 py-32 overflow-hidden">
+    <section className="relative editorial-section px-6 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-12 text-center"
+        className="mb-14 flex flex-col items-center text-center"
       >
-        <p className="text-[10px] uppercase tracking-[0.6em] text-white/40 mb-2"
-          style={{ fontFamily: "var(--font-display)" }}>
-          Interlude
-        </p>
-        <h3 className="text-3xl sm:text-4xl gold-text italic" style={{ fontFamily: "var(--font-display)" }}>
+        <p className="kicker mb-4">Interlude</p>
+        <span className="rule rule-center mb-6" />
+        <h3
+          className="text-3xl sm:text-4xl italic"
+          style={{ fontFamily: "var(--font-display)", color: "var(--ivory)", fontWeight: 500 }}
+        >
           Even the stars know your name
         </h3>
       </motion.div>
