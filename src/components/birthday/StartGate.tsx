@@ -37,7 +37,7 @@ export function StartGate({ onStart }: { onStart: () => void }) {
           className="group relative rounded-full border border-white/30 px-10 py-4 text-sm uppercase tracking-[0.4em] text-white backdrop-blur"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          <span className="relative z-10">▶  Begin the film</span>
+          <span className="relative z-10">▶  Begin</span>
           <span
             className="absolute inset-0 rounded-full opacity-60 blur-xl"
             style={{ background: "radial-gradient(circle, oklch(0.72 0.19 10 / 0.6), transparent 70%)" }}
