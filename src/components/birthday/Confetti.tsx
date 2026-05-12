@@ -45,7 +45,7 @@ export function ConfettiFinale() {
               animate={{ y: "115vh", rotate: p.rot, opacity: [1, 1, 0], scale: 1 }}
               transition={{ duration: p.dur, delay: p.delay, ease: [0.4, 0, 0.6, 1] }}
               className="absolute top-0 block leading-none"
-              style={{ color: p.color, fontSize: p.size, left: 0, textShadow: `0 0 6px ${p.color}` }}
+              style={{ color: p.color, fontSize: p.size, left: 0, ...(lowPower ? null : { textShadow: `0 0 6px ${p.color}` }) }}
             >
               {p.shape}
             </motion.span>
