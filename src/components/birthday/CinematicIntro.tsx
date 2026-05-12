@@ -13,11 +13,12 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
 
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = [];
+    const PER = 2800;
     lines.forEach((_, i) => {
-      timers.push(setTimeout(() => setStep(i + 1), (i + 1) * 1400));
+      timers.push(setTimeout(() => setStep(i + 1), (i + 1) * PER));
     });
-    timers.push(setTimeout(() => setClosing(true), lines.length * 1400 + 600));
-    timers.push(setTimeout(() => onDone(), lines.length * 1400 + 1800));
+    timers.push(setTimeout(() => setClosing(true), lines.length * PER + 1200));
+    timers.push(setTimeout(() => onDone(), lines.length * PER + 2400));
     return () => timers.forEach(clearTimeout);
   }, [onDone]);
 
