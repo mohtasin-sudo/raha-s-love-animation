@@ -113,7 +113,14 @@ export function ConfettiFinale() {
       </motion.div>
 
       {/* Subtle "Tahmid" watermark — present but not loud */}
-      <div className="relative mt-16 select-none" aria-hidden>
+      <motion.div
+        className="relative mt-16 select-none"
+        aria-hidden
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 2, ease: "easeOut" }}
+      >
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
           style={{
@@ -123,7 +130,7 @@ export function ConfettiFinale() {
             letterSpacing: "-0.02em",
             lineHeight: 1,
             filter: "blur(0.5px)",
-            opacity: 0.06,
+            opacity: 0.025,
           }}
         >
           Tahmid
@@ -134,12 +141,12 @@ export function ConfettiFinale() {
           style={{
             color: "oklch(0.85 0.06 70)",
             fontFamily: "var(--font-display)",
-            opacity: 0.4,
+            opacity: 0.18,
           }}
         >
           ✦ t a h m i d ✦
         </p>
-      </div>
+      </motion.div>
     </section>
   );
 }
