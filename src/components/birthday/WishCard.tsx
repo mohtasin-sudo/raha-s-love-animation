@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 const message =
-  "Some wishes don't need a name on them. Some are quieter than that. Today the sky feels a little softer, the evening a little kinder — as if the world remembered. May this year hold its hands gently around you. May the days you've been waiting for find their way home. May the small things — a song you love, a window of light, a message that arrives at the right hour — keep meeting you, again and again. And somewhere far enough not to matter, someone is folding all of that into a single, steady wish. Be happy, Raha. That is all.";
+  "Some wishes don't need a name on them. Today the sky feels a little softer — as if the world remembered. May this year hold you gently. May the small things — a song you love, a message at the right hour — keep finding you. Somewhere far enough not to matter, someone is folding all of that into a single, steady wish. Be happy, Raha. That is all.";
 
 export function WishCard() {
   const ref = useRef(null);
