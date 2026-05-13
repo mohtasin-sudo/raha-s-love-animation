@@ -5,6 +5,7 @@ import { FloatingHearts } from "@/components/birthday/FloatingHearts";
 import { CinematicIntro } from "@/components/birthday/CinematicIntro";
 import { ScrollMascot } from "@/components/birthday/ScrollMascot";
 import { StartGate } from "@/components/birthday/StartGate";
+import { ScrollProgress } from "@/components/birthday/ScrollProgress";
 
 const WishCard = lazy(() => import("@/components/birthday/WishCard").then(m => ({ default: m.WishCard })));
 const Cake = lazy(() => import("@/components/birthday/Cake").then(m => ({ default: m.Cake })));
