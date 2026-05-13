@@ -38,6 +38,42 @@ export function Hero() {
     <section className="relative flex min-h-[100dvh] flex-col items-center justify-center px-6 py-24 text-center overflow-hidden">
       <Stars count={isMobile ? 24 : 60} />
 
+      {/* Vertical "keep scrolling" floating hint on the right edge */}
+      <motion.div
+        initial={{ opacity: 0, x: 10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, delay: 3.2 }}
+        className="pointer-events-none absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-3"
+        aria-hidden
+      >
+        <motion.span
+          className="block w-[1px]"
+          style={{ background: "linear-gradient(180deg, transparent, var(--gold))" }}
+          animate={{ height: [16, 36, 16], opacity: [0.3, 1, 0.3] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <span
+          className="text-[9px] tracking-[0.5em] uppercase"
+          style={{
+            fontFamily: "var(--font-sans)",
+            color: "var(--gold)",
+            writingMode: "vertical-rl",
+            textOrientation: "mixed",
+          }}
+        >
+          keep scrolling
+        </span>
+        <motion.span
+          className="text-xs"
+          style={{ color: "var(--gold)" }}
+          animate={{ y: [0, 6, 0], opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          ↓
+        </motion.span>
+      </motion.div>
+
+
       {/* Soft warm glow, single, restrained */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div
