@@ -114,12 +114,7 @@ export function ConfettiFinale() {
 
       {/* Subtle "Tahmid" watermark — present but not loud */}
       <div className="relative mt-16 select-none" aria-hidden>
-        {/* Huge faded script behind */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.06 }}
-          viewport={{ once: true }}
-          transition={{ duration: 2.5, delay: 1 }}
+        <div
           className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
           style={{
             fontFamily: "'Pinyon Script', cursive",
@@ -128,25 +123,22 @@ export function ConfettiFinale() {
             letterSpacing: "-0.02em",
             lineHeight: 1,
             filter: "blur(0.5px)",
+            opacity: 0.06,
           }}
         >
           Tahmid
-        </motion.div>
+        </div>
 
-        {/* Tiny credit line — readable if you look */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.4 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5, delay: 1.2 }}
+        <p
           className="relative text-[9px] tracking-[0.45em] uppercase"
           style={{
             color: "oklch(0.85 0.06 70)",
             fontFamily: "var(--font-display)",
+            opacity: 0.4,
           }}
         >
           ✦ t a h m i d ✦
-        </motion.p>
+        </p>
       </div>
     </section>
   );
