@@ -130,7 +130,7 @@ export function ConfettiFinale() {
             letterSpacing: "-0.02em",
             lineHeight: 1,
             filter: "blur(0.5px)",
-            opacity: 0.025,
+            opacity: 0.028,
           }}
         >
           Tahmid
@@ -141,7 +141,7 @@ export function ConfettiFinale() {
           style={{
             color: "oklch(0.85 0.06 70)",
             fontFamily: "var(--font-display)",
-            opacity: 0.18,
+            opacity: 0.195,
           }}
         >
           ✦ t a h m i d ✦
