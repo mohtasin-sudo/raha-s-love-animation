@@ -94,6 +94,7 @@ function Index() {
       {!started && <StartGate onStart={handleBegin} />}
       {started && !introDone && <CinematicIntro onDone={handleIntroDone} />}
       {introDone && <ScrollMascot />}
+      {introDone && <ScrollProgress total={7} />}
 
       <FloatingHearts count={22} />
       <div className="relative z-10">
