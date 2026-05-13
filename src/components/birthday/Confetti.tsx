@@ -119,7 +119,7 @@ export function ConfettiFinale() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 2, ease: "easeOut" }}
+        transition={{ duration: 2.5, delay: 1.8, ease: "easeOut" }}
       >
         <div
           className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap"
